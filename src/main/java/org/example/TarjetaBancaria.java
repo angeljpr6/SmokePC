@@ -1,13 +1,8 @@
-<<<<<<< HEAD
+
 package org.example;
 
 public class TarjetaBancaria {
+    private int numTarjeta;
 
 }
-=======
-package org.example;
 
-public class TarjetaBancaria {
-
-}
->>>>>>> origin/main
