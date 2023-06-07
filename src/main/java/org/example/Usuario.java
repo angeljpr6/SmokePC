@@ -11,7 +11,6 @@ public class Usuario {
     private String email;
     private Cesta cesta;
     private double saldo;
-    private ArrayList<TarjetaBancaria> metodosPago;
 
     public Usuario(String nombre,String apellidos,String email){
         this.id=allId.size();
@@ -22,8 +21,13 @@ public class Usuario {
         this.saldo=0;
     }
 
+    /**
+     * Se añade una tarjeta bancaria a la base de datos y se vincula con el usuario
+     *
+     * @param tarjetaBancaria
+     */
     public void anadirMetodoPago(TarjetaBancaria tarjetaBancaria){
-        this.metodosPago.add(tarjetaBancaria);
+
     }
 
 }
