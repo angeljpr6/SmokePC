@@ -2,6 +2,7 @@ package org.example;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Usuario {
@@ -32,7 +33,13 @@ public class Usuario {
     public void anadirMetodoPago(TarjetaCredito tarjetaCredito){
         String titular=tarjetaCredito.getTitular();
         int cvv=tarjetaCredito.getCvv();
-        PreparedStatement stm = c.prepareStatement("insert into tarjetaCredito values()");
+        int numTarjeta=tarjetaCredito.getNumTarjeta();
+        int idUsuario=this.id;
+        try {
+            PreparedStatement stm = c.prepareStatement("insert into tarjetaCredito values(numTarjeta,idUsuario,titular,cvv);");
+        } catch (SQLException e) {
+            System.out.println("Ups... algo ha fallado");
+        }
     }
 
 }

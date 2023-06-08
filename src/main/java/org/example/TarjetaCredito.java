@@ -2,6 +2,11 @@
 package org.example;
 
 public class TarjetaCredito {
+    private int numTarjeta;
+    private String titular;
+    private int cvv;
+    private int idUsuario;
+
     public int getNumTarjeta() {
         return numTarjeta;
     }
@@ -33,10 +38,5 @@ public class TarjetaCredito {
     public void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
     }
-
-    private int numTarjeta;
-    private String titular;
-    private int cvv;
-    private int idUsuario;
 }
 
