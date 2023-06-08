@@ -12,7 +12,7 @@ public class Principal {
     public static void initConection() {
         try {
 
-            c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/concesionario", usuario, password);
+            c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/smokepc", usuario, password);
             System.out.println("ÉXITO");
         } catch (Exception e) {
             System.out.println("NOP");
