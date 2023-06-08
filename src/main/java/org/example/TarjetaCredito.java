@@ -7,6 +7,13 @@ public class TarjetaCredito {
     private int cvv;
     private int idUsuario;
 
+    public TarjetaCredito(int numTarjeta, String titular, int cvv, int idUsuario) {
+        this.numTarjeta = numTarjeta;
+        this.titular = titular;
+        this.cvv = cvv;
+        this.idUsuario = idUsuario;
+    }
+
     public int getNumTarjeta() {
         return numTarjeta;
     }

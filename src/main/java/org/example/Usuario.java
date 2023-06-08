@@ -14,7 +14,7 @@ public class Usuario {
     private String email;
     private Cesta cesta;
     private double saldo;
-    private Connection c=Principal.getC();
+    private static Connection c=Principal.getC();
 
     public Usuario(String nombre,String apellidos,String email){
         this.id=allId.size();
@@ -30,13 +30,16 @@ public class Usuario {
      *
      * @param tarjetaCredito
      */
-    public void anadirMetodoPago(TarjetaCredito tarjetaCredito){
-        String titular=tarjetaCredito.getTitular();
-        int cvv=tarjetaCredito.getCvv();
-        int numTarjeta=tarjetaCredito.getNumTarjeta();
-        int idUsuario=this.id;
+    public static void anadirMetodoPago(TarjetaCredito tarjetaCredito){
+
         try {
-            PreparedStatement stm = c.prepareStatement("insert into tarjetaCredito values(numTarjeta,idUsuario,titular,cvv);");
+            PreparedStatement stm = c.prepareStatement("insert into TarjetaCredito values(?,?,?,?);");
+            stm.setInt(1,tarjetaCredito.getNumTarjeta());
+            stm.setInt(2,tarjetaCredito.getIdUsuario());
+            stm.setString(3,tarjetaCredito.getTitular());
+            stm.setInt(4,tarjetaCredito.getCvv());
+            stm.execute();
+            System.out.println("Esto funciona");
         } catch (SQLException e) {
             System.out.println("Ups... algo ha fallado");
         }
