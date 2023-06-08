@@ -6,6 +6,5 @@ public class TarjetaCredito {
     private String titular;
     private int cvv;
     private int idUsuario;
-
 }
 
