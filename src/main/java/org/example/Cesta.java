@@ -3,7 +3,7 @@ package org.example;
 import java.util.ArrayList;
 
 public class Cesta {
-    private ArrayList<Producto> productos;
+    private ArrayList<Productos> productos;
     private int cantidad;
     private double precioTotal;
 
@@ -14,7 +14,7 @@ public class Cesta {
 
     }
 
-    public void añadirProductos(Producto producto){
+    public void añadirProductos(Productos producto){
         this.productos.add(producto);
     }
 

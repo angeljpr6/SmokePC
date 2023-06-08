@@ -26,7 +26,7 @@ public class Usuario {
      *
      * @param tarjetaBancaria
      */
-    public void anadirMetodoPago(TarjetaBancaria tarjetaBancaria){
+    public void anadirMetodoPago(TarjetaCredito tarjetaBancaria){
 
     }
 
