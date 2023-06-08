@@ -39,7 +39,6 @@ public class Usuario {
             stm.setString(3,tarjetaCredito.getTitular());
             stm.setInt(4,tarjetaCredito.getCvv());
             stm.execute();
-            System.out.println("Esto funciona");
         } catch (SQLException e) {
             System.out.println("Ups... algo ha fallado");
         }
