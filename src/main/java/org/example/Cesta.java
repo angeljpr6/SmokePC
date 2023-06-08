@@ -1,5 +1,7 @@
 package org.example;
 
+
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 
 public class Cesta {
@@ -14,7 +16,7 @@ public class Cesta {
 
     }
 
-    public void añadirProductos(Productos producto){
+    public void anadirProductos(Productos producto){
         this.productos.add(producto);
     }
 

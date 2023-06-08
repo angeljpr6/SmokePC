@@ -9,6 +9,10 @@ public class Principal {
     private static String password="1234";
     private static Connection c;
 
+    public static Connection getC() {
+        return c;
+    }
+
     public static void initConection() {
         try {
 

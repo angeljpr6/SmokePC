@@ -1,5 +1,7 @@
 package org.example;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 
 public class Usuario {
@@ -11,6 +13,7 @@ public class Usuario {
     private String email;
     private Cesta cesta;
     private double saldo;
+    private Connection c=Principal.getC();
 
     public Usuario(String nombre,String apellidos,String email){
         this.id=allId.size();
@@ -24,10 +27,12 @@ public class Usuario {
     /**
      * Se añade una tarjeta bancaria a la base de datos y se vincula con el usuario
      *
-     * @param tarjetaBancaria
+     * @param tarjetaCredito
      */
-    public void anadirMetodoPago(TarjetaCredito tarjetaBancaria){
-
+    public void anadirMetodoPago(TarjetaCredito tarjetaCredito){
+        String titular=tarjetaCredito.getTitular();
+        int cvv=tarjetaCredito.getCvv();
+        PreparedStatement stm = c.prepareStatement("insert into tarjetaCredito values()");
     }
 
 }
