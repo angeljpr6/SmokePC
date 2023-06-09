@@ -74,7 +74,7 @@ public class Usuario {
             stm.setFloat(3,cesta.getPrecioTotal());
             stm.setInt(4,cesta.getId());
             stm.setInt(5,this.id);
-            stm.setString(6,"");
+            stm.setString(6,"En tramitacion");
         } catch (SQLException e) {
             System.out.println("Algo ha ido mal");
         }

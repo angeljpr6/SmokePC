@@ -5,7 +5,7 @@ public class Compra {
     private String hora;
     private int tickect;
     private double precio;
-    private static String[] estado = {"tramitacion", "enviado", "rechazado", "llegando"};
+    private static String[] estado = {"En tramitacion", "enviado", "rechazado", "llegando"};
 
     public static  void cambiarEstado(String estadoActual, boolean cestaConfirmada) {
         if (cestaConfirmada) {
