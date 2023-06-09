@@ -12,7 +12,7 @@ public class Usuario {
     private String apellidos;
     private String email;
     private Cesta cesta;
-    private double saldo;
+    private float saldo;
     private static Connection c=Principal.getC();
     private String contrasena;
 
@@ -32,12 +32,25 @@ public class Usuario {
         this.saldo=0;
     }
 
-    public static void iniciarSesion(String email,String contrasena){
+    /**
+     * Se le pasa unos valores por parametro e inicia sesion
+     * @param email
+     * @param contrasena
+     */
+    public void iniciarSesion(String email,String contrasena){
         try {
             PreparedStatement stm = c.prepareStatement("select * from usuario where contrasena=? and email=?;");
             stm.setString(1,contrasena);
             stm.setString(2,email);
             stm.execute();
+            ResultSet result = stm.executeQuery();
+            while (result.next()) {
+                this.id=result.getInt("id");
+                this.nombre=result.getString("nombre");
+                this.apellidos=result.getString("apellidos");
+                this.saldo=result.getFloat("saldo");
+
+            }
             System.out.println("Sesion iniciada");
 
         } catch (SQLException e) {
@@ -51,6 +64,17 @@ public class Usuario {
             stm.setString(2,apellidos);
             stm.setString(3,email);
             stm.setString(4,contrasena);
+
+            stm =c.prepareStatement("select id from usuario where email=?");
+            stm.setString(1,email);
+            ResultSet result = stm.executeQuery();
+            while (result.next()) {
+                this.id=result.getInt("id");
+            }
+            this.saldo=0;
+
+            stm = c.prepareStatement("insert into cesta values (default,0,0,?)");
+            stm.setInt(1,this.id);
         } catch (SQLException e) {
             System.out.println("Algo falla registrarUsuario");
         }
@@ -158,11 +182,11 @@ public class Usuario {
         this.cesta = cesta;
     }
 
-    public double getSaldo() {
+    public float getSaldo() {
         return saldo;
     }
 
-    public void setSaldo(double saldo) {
+    public void setSaldo(float saldo) {
         this.saldo = saldo;
     }
 }

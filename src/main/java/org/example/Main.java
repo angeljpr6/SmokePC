@@ -9,9 +9,10 @@ public class Main {
 
         Usuario usuario=new Usuario(1,"Pepe","Popo","plinplinplonnn","pupu");
 
+        Usuario usuario1=new Usuario();
         //usuario.registrarUsuario();
 
-        Usuario.iniciarSesion("plinplinplon","pupu");
+        usuario1.iniciarSesion("plinplinplon","pupu");
 
 
 
