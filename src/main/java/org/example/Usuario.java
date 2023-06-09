@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 public class Usuario {
 
-    private static ArrayList<Integer> allId=new ArrayList<>();
     private int id;
     private String nombre;
     private String apellidos;
@@ -16,9 +15,8 @@ public class Usuario {
     private double saldo;
     private static Connection c=Principal.getC();
 
-    public Usuario(String nombre,String apellidos,String email){
-        this.id=allId.size();
-        allId.add(this.id);
+    public Usuario(int id,String nombre,String apellidos,String email){
+        this.id=id;
         this.nombre=nombre;
         this.apellidos=apellidos;
         this.email=email;
@@ -64,17 +62,19 @@ public class Usuario {
 
     /**
      * Hace la compra de una cesta a nombre del usuario
-     * @param cesta
+     * @param i
      */
-    public void comprarCesta(Cesta cesta){
+    public void comprarCesta(int i,float f){
         try {
             PreparedStatement stm = c.prepareStatement("insert into Compras values(default,?,?,?,?,?,?);");
             stm.setDate(1, Date.valueOf(LocalDate.now()));
             stm.setTime(2,Time.valueOf(LocalTime.now()));
-            stm.setFloat(3,cesta.getPrecioTotal());
-            stm.setInt(4,cesta.getId());
+            //stm.setFloat(3,cesta.getPrecioTotal());
+            stm.setFloat(3,f);
+            stm.setInt(4,i);
             stm.setInt(5,this.id);
             stm.setString(6,"En tramitacion");
+            stm.execute();
         } catch (SQLException e) {
             System.out.println("Algo ha ido mal");
         }

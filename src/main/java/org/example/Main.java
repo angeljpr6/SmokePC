@@ -7,6 +7,11 @@ public class Main {
 
         Principal.initConection();
 
+        Usuario usuario=new Usuario(1,"Angel","Perez","Angelpinpiun");
+
+
+        Usuario.verCompra(1);
+
 
     }
 }

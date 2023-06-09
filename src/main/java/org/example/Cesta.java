@@ -14,7 +14,7 @@ public class Cesta {
     private float precioTotal;
     private Connection c=Principal.getC();
 
-    public Cesta(int id, int idUsuario, int cantidad, float precioTotal, Connection c) {
+    public Cesta(int id, int idUsuario, int cantidad, float precioTotal) {
         try {
             PreparedStatement stm = c.prepareStatement("select * from Cesta where id = ?; ");
             stm.setInt(1,this.idUsuario);
