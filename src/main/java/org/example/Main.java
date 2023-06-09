@@ -12,6 +12,8 @@ public class Main {
 
         Usuario.verCompra(1);
 
+        Productos.cambiarPrecio(1,12.5f);
+
 
     }
 }
