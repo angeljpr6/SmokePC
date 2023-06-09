@@ -7,9 +7,11 @@ public class Main {
 
         Principal.initConection();
 
-        Usuario usuario=new Usuario(1,"Pepe","Popo","plinplinplon");
+        Usuario usuario=new Usuario(1,"Pepe","Popo","plinplinplonnn","pupu");
 
-        usuario.registrarUsuario();
+        //usuario.registrarUsuario();
+
+        Usuario.iniciarSesion("plinplinplon","pupu");
 
 
 

@@ -14,22 +14,43 @@ public class Usuario {
     private Cesta cesta;
     private double saldo;
     private static Connection c=Principal.getC();
+    private String contrasena;
 
-    public Usuario(int id,String nombre,String apellidos,String email){
+    public Usuario(int id,String nombre,String apellidos,String email,String contrasena){
         this.id=id;
         this.nombre=nombre;
         this.apellidos=apellidos;
         this.email=email;
         this.saldo=0;
+        this.contrasena=contrasena;
+    }
+    public Usuario(){
+        this.id=0;
+        this.nombre="";
+        this.apellidos="";
+        this.email="";
+        this.saldo=0;
     }
 
+    public static void iniciarSesion(String email,String contrasena){
+        try {
+            PreparedStatement stm = c.prepareStatement("select * from usuario where contrasena=? and email=?;");
+            stm.setString(1,contrasena);
+            stm.setString(2,email);
+            stm.execute();
+            System.out.println("Sesion iniciada");
+
+        } catch (SQLException e) {
+            System.out.println("Email o contraseña incorrectos");
+        }
+    }
     public void registrarUsuario(){
         try {
-            PreparedStatement stm = c.prepareStatement("insert into Usuario values(default,?,?,0,?);");
+            PreparedStatement stm = c.prepareStatement("insert into Usuario values(default,?,?,?,0,?);");
             stm.setString(1,nombre);
             stm.setString(2,apellidos);
             stm.setString(3,email);
-            stm.execute();
+            stm.setString(4,contrasena);
         } catch (SQLException e) {
             System.out.println("Algo falla registrarUsuario");
         }
