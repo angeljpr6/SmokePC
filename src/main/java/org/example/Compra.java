@@ -6,28 +6,34 @@ public class Compra {
     private int tickect;
     private double precio;
     private static String[] estado = {"En tramitacion", "enviado", "rechazado", "llegando"};
+    private static Connection c = Principal.getC();
+    public static void cambiarEstado(int indiceEstado, int ticket) {
+        String estadoActual = null;
 
-    public static  void cambiarEstado(String estadoActual, boolean cestaConfirmada) {
-        if (cestaConfirmada) {
-            if (estado[0].equals(estadoActual)) { // "tramitacion"
-                estadoActual = estado[3]; // "llegando"
-                System.out.println("Estado de la compra actualizado a 'llegando'");
-            } else {
-                System.out.println("La compra ya ha sido confirmada o tiene un estado inválido");
-            }
+        // ↓↓Comprobación↓↓
+        if (indiceEstado >= 0 && indiceEstado < estado.length) {
+            estadoActual = estado[indiceEstado];
         } else {
-            if (estado[0].equals(estadoActual)) { // "tramitacion"
-                estadoActual = estado[2]; // "rechazado"
-                System.out.println("Estado de la compra actualizado a 'rechazado'");
-            } else {
-                System.out.println("La compra ya ha sido confirmada o tiene un estado inválido");
-            }
+            estadoActual = estado[2]; // ↢  ↢ ↢"rechazado"
         }
+        // ↑↑Comprobación↑↑
 
-        if (estado[3].equals(estadoActual)) { // "llegando"
-            estadoActual = estado[1]; // "enviado"
-            System.out.println("Estado de la compra actualizado a 'enviado'");
-            System.out.println("El envío se ha efectuado correctamente");
+        // ↓↓Actualización en la base de datos↓↓
+        actualizarEstadoEnBaseDeDatos(estadoActual, ticket);
+
+        //↓↓ Mensaje de confirmación en consola↓↓
+        System.out.println("Estado de la compra actualizado: " + estadoActual);
+    }
+
+    private static void actualizarEstadoEnBaseDeDatos(String estadoActual, int ticket) {
+        try {
+            PreparedStatement stm = c.prepareStatement("UPDATE Compras SET estado = ? WHERE ticket = ?");
+            stm.setString(1, estadoActual);
+            stm.setInt(2, ticket);
+            stm.executeUpdate();
+            System.out.println("Estado de la compra actualizado en la base de datos.");
+        } catch (SQLException e) {
+            System.out.println("Error al actualizar el estado en la base de datos: " + e.getMessage());
         }
     }
 }
