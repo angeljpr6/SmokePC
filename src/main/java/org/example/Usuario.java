@@ -23,6 +23,18 @@ public class Usuario {
         this.saldo=0;
     }
 
+    public void registrarUsuario(){
+        try {
+            PreparedStatement stm = c.prepareStatement("insert into Usuario values(default,?,?,0,?);");
+            stm.setString(1,nombre);
+            stm.setString(2,apellidos);
+            stm.setString(3,email);
+            stm.execute();
+        } catch (SQLException e) {
+            System.out.println("Algo falla registrarUsuario");
+        }
+    }
+
     /**
      * Se añade una tarjeta bancaria a la base de datos y se vincula con el usuario
      *

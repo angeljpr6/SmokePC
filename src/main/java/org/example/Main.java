@@ -7,10 +7,10 @@ public class Main {
 
         Principal.initConection();
 
-        Usuario usuario=new Usuario(1,"Angel","Perez","Angelpinpiun");
+        Usuario usuario=new Usuario(1,"Pepe","Popo","plinplinplon");
 
+        usuario.registrarUsuario();
 
-        Usuario.verCompra(3);
 
 
 
