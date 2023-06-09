@@ -10,9 +10,8 @@ public class Main {
         Usuario usuario=new Usuario(1,"Angel","Perez","Angelpinpiun");
 
 
-        Usuario.verCompra(1);
+        Usuario.verCompra(3);
 
-        Productos.cambiarPrecio(1,12.5f);
 
 
     }

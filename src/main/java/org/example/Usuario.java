@@ -48,13 +48,15 @@ public class Usuario {
      */
     public static void verCompra(int ticket){
         try {
-            PreparedStatement stm = c.prepareStatement("select * from Compra where ticket=?;");
+            PreparedStatement stm = c.prepareStatement("select * from Compras where ticket=?;");
             stm.setInt(1,ticket);
             ResultSet result = stm.executeQuery();
-            System.out.println("Ticket: "+result.getInt("ticket"));
-            System.out.println("Fecha y Hora de compra: "+result.getDate("fecha")+" "+result.getTime("hora"));
-            System.out.println("Precio Total: "+result.getFloat("precio"));
-            System.out.println("Estado: "+result.getString("estado"));
+            while (result.next()) {
+                System.out.println("Ticket: " + result.getInt("ticket"));
+                System.out.println("Fecha y Hora de compra: " + result.getDate("fecha") + " " + result.getTime("hora"));
+                System.out.println("Precio Total: " + result.getFloat("precio"));
+                System.out.println("Estado: " + result.getString("estado"));
+            }
         } catch (SQLException e) {
             System.out.println("Ups... algo ha fallado");
         }
@@ -79,6 +81,8 @@ public class Usuario {
             System.out.println("Algo ha ido mal");
         }
     }
+
+
 
     // GETTER & SETTER
     public int getId() {
