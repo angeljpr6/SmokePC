@@ -12,15 +12,118 @@ public class Usuario {
     private String apellidos;
     private String email;
     private Cesta cesta;
-    private double saldo;
+    private float saldo;
     private static Connection c=Principal.getC();
+    private String contrasena;
 
-    public Usuario(int id,String nombre,String apellidos,String email){
+    public Usuario(int id,String nombre,String apellidos,String email,String contrasena){
         this.id=id;
         this.nombre=nombre;
         this.apellidos=apellidos;
         this.email=email;
         this.saldo=0;
+        this.contrasena=contrasena;
+    }
+    public Usuario(){
+        this.id=0;
+        this.nombre="";
+        this.apellidos="";
+        this.email="";
+        this.saldo=0;
+    }
+
+    /**
+     * Se le pasa un email y una contraseña por parametro e inicia sesion si son correctos
+     * @param email
+     * @param contrasena
+     */
+    public void iniciarSesion(String email,String contrasena){
+        try {
+            PreparedStatement stm = c.prepareStatement("select * from usuario where contrasena=? and email=?;");
+            stm.setString(1,contrasena);
+            stm.setString(2,email);
+            stm.execute();
+            ResultSet result = stm.executeQuery();
+            while (result.next()) {
+                this.id=result.getInt("id");
+                this.nombre=result.getString("nombre");
+                this.apellidos=result.getString("apellidos");
+                this.saldo=result.getFloat("saldo");
+
+            }
+            System.out.println("Sesion iniciada");
+
+        } catch (SQLException e) {
+            System.out.println("Email o contraseña incorrectos");
+        }
+    }
+
+    /**
+     * Se le pasa los datos principales del usuario por parametro entonces estos se insertan en la base de datos
+     * y despues se añaden a los atributos del usuario
+     *
+     * @param nombre
+     * @param apellidos
+     * @param email
+     * @param contrasena
+     */
+    public void registrarUsuario(String nombre,String apellidos,String email,String contrasena){
+        try {
+            PreparedStatement stm = c.prepareStatement("insert into Usuario values(default,?,?,?,0,?,null);");
+            stm.setString(1,nombre);
+            stm.setString(2,apellidos);
+            stm.setString(3,email);
+            stm.setString(4,contrasena);
+            stm.execute();
+
+            this.nombre=nombre;
+            this.apellidos=apellidos;
+            this.email=email;
+            this.contrasena=contrasena;
+
+            stm =c.prepareStatement("select id from usuario where email=?");
+            stm.setString(1,email);
+            ResultSet result = stm.executeQuery();
+            while (result.next()) {
+                this.id=result.getInt("id");
+            }
+            this.saldo=0;
+
+            //Metodo para crear una cesta que se le añadira al usuario
+
+        } catch (SQLException e) {
+            System.out.println("Algo falla registrarUsuario");
+        }
+    }
+
+    public void cambiarCesta(){
+
+        //Se usara el metodo crear cesta Dani cabron hazlo
+
+        try {
+            PreparedStatement stm = c.prepareStatement("update Usuario set idCesta=? where idUsuario=?");
+            //stm.setInt(1, EL ID DE LA CESTA QUE SE CREARA EN EL METODO ANTERIOR);
+            stm.setInt(2,this.id);
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    /**
+     * Se el pasa un String por parametro que pasara a ser el nuevo email del usuario
+     * @param nuevoEmail
+     */
+    public void cambiarEmail(String nuevoEmail){
+        this.email=nuevoEmail;
+        try {
+            PreparedStatement stm = c.prepareStatement("update usuario set email=? where id=?");
+            stm.setString(1,nuevoEmail);
+            stm.setInt(2,this.id);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
@@ -48,13 +151,15 @@ public class Usuario {
      */
     public static void verCompra(int ticket){
         try {
-            PreparedStatement stm = c.prepareStatement("select * from Compra where ticket=?;");
+            PreparedStatement stm = c.prepareStatement("select * from Compras where ticket=?;");
             stm.setInt(1,ticket);
             ResultSet result = stm.executeQuery();
-            System.out.println("Ticket: "+result.getInt("ticket"));
-            System.out.println("Fecha y Hora de compra: "+result.getDate("fecha")+" "+result.getTime("hora"));
-            System.out.println("Precio Total: "+result.getFloat("precio"));
-            System.out.println("Estado: "+result.getString("estado"));
+            while (result.next()) {
+                System.out.println("Ticket: " + result.getInt("ticket"));
+                System.out.println("Fecha y Hora de compra: " + result.getDate("fecha") + " " + result.getTime("hora"));
+                System.out.println("Precio Total: " + result.getFloat("precio"));
+                System.out.println("Estado: " + result.getString("estado"));
+            }
         } catch (SQLException e) {
             System.out.println("Ups... algo ha fallado");
         }
@@ -79,6 +184,8 @@ public class Usuario {
             System.out.println("Algo ha ido mal");
         }
     }
+
+
 
     // GETTER & SETTER
     public int getId() {
@@ -121,11 +228,11 @@ public class Usuario {
         this.cesta = cesta;
     }
 
-    public double getSaldo() {
+    public float getSaldo() {
         return saldo;
     }
 
-    public void setSaldo(double saldo) {
+    public void setSaldo(float saldo) {
         this.saldo = saldo;
     }
 }
