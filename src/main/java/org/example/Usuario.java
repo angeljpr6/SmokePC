@@ -12,15 +12,72 @@ public class Usuario {
     private String apellidos;
     private String email;
     private Cesta cesta;
-    private double saldo;
+    private float saldo;
     private static Connection c=Principal.getC();
+    private String contrasena;
 
-    public Usuario(int id,String nombre,String apellidos,String email){
+    public Usuario(int id,String nombre,String apellidos,String email,String contrasena){
         this.id=id;
         this.nombre=nombre;
         this.apellidos=apellidos;
         this.email=email;
         this.saldo=0;
+        this.contrasena=contrasena;
+    }
+    public Usuario(){
+        this.id=0;
+        this.nombre="";
+        this.apellidos="";
+        this.email="";
+        this.saldo=0;
+    }
+
+    /**
+     * Se le pasa unos valores por parametro e inicia sesion
+     * @param email
+     * @param contrasena
+     */
+    public void iniciarSesion(String email,String contrasena){
+        try {
+            PreparedStatement stm = c.prepareStatement("select * from usuario where contrasena=? and email=?;");
+            stm.setString(1,contrasena);
+            stm.setString(2,email);
+            stm.execute();
+            ResultSet result = stm.executeQuery();
+            while (result.next()) {
+                this.id=result.getInt("id");
+                this.nombre=result.getString("nombre");
+                this.apellidos=result.getString("apellidos");
+                this.saldo=result.getFloat("saldo");
+
+            }
+            System.out.println("Sesion iniciada");
+
+        } catch (SQLException e) {
+            System.out.println("Email o contraseña incorrectos");
+        }
+    }
+    public void registrarUsuario(){
+        try {
+            PreparedStatement stm = c.prepareStatement("insert into Usuario values(default,?,?,?,0,?);");
+            stm.setString(1,nombre);
+            stm.setString(2,apellidos);
+            stm.setString(3,email);
+            stm.setString(4,contrasena);
+
+            stm =c.prepareStatement("select id from usuario where email=?");
+            stm.setString(1,email);
+            ResultSet result = stm.executeQuery();
+            while (result.next()) {
+                this.id=result.getInt("id");
+            }
+            this.saldo=0;
+
+            stm = c.prepareStatement("insert into cesta values (default,0,0,?)");
+            stm.setInt(1,this.id);
+        } catch (SQLException e) {
+            System.out.println("Algo falla registrarUsuario");
+        }
     }
 
     /**
@@ -48,13 +105,15 @@ public class Usuario {
      */
     public static void verCompra(int ticket){
         try {
-            PreparedStatement stm = c.prepareStatement("select * from Compra where ticket=?;");
+            PreparedStatement stm = c.prepareStatement("select * from Compras where ticket=?;");
             stm.setInt(1,ticket);
             ResultSet result = stm.executeQuery();
-            System.out.println("Ticket: "+result.getInt("ticket"));
-            System.out.println("Fecha y Hora de compra: "+result.getDate("fecha")+" "+result.getTime("hora"));
-            System.out.println("Precio Total: "+result.getFloat("precio"));
-            System.out.println("Estado: "+result.getString("estado"));
+            while (result.next()) {
+                System.out.println("Ticket: " + result.getInt("ticket"));
+                System.out.println("Fecha y Hora de compra: " + result.getDate("fecha") + " " + result.getTime("hora"));
+                System.out.println("Precio Total: " + result.getFloat("precio"));
+                System.out.println("Estado: " + result.getString("estado"));
+            }
         } catch (SQLException e) {
             System.out.println("Ups... algo ha fallado");
         }
@@ -79,6 +138,8 @@ public class Usuario {
             System.out.println("Algo ha ido mal");
         }
     }
+
+
 
     // GETTER & SETTER
     public int getId() {
@@ -121,11 +182,11 @@ public class Usuario {
         this.cesta = cesta;
     }
 
-    public double getSaldo() {
+    public float getSaldo() {
         return saldo;
     }
 
-    public void setSaldo(double saldo) {
+    public void setSaldo(float saldo) {
         this.saldo = saldo;
     }
 }

@@ -7,12 +7,14 @@ public class Main {
 
         Principal.initConection();
 
-        Usuario usuario=new Usuario(1,"Angel","Perez","Angelpinpiun");
+        Usuario usuario=new Usuario(1,"Pepe","Popo","plinplinplonnn","pupu");
+
+        Usuario usuario1=new Usuario();
+        //usuario.registrarUsuario();
+
+        usuario1.iniciarSesion("plinplinplon","pupu");
 
 
-        Usuario.verCompra(1);
-
-        Productos.cambiarPrecio(1,12.5f);
 
 
     }
