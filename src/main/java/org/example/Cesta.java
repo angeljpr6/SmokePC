@@ -34,6 +34,7 @@ public class Cesta {
 
     }
 
+
     public void anadirProductos(int idCesta, int referencia){
         try {
             PreparedStatement stm = c.prepareStatement("insert into Tiene (idCesta, referencia ) values(?,?);");

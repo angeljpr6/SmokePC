@@ -33,7 +33,7 @@ public class Usuario {
     }
 
     /**
-     * Se le pasa unos valores por parametro e inicia sesion
+     * Se le pasa un email y una contraseña por parametro e inicia sesion si son correctos
      * @param email
      * @param contrasena
      */
@@ -57,13 +57,29 @@ public class Usuario {
             System.out.println("Email o contraseña incorrectos");
         }
     }
-    public void registrarUsuario(){
+
+    /**
+     * Se le pasa los datos principales del usuario por parametro entonces estos se insertan en la base de datos
+     * y despues se añaden a los atributos del usuario
+     *
+     * @param nombre
+     * @param apellidos
+     * @param email
+     * @param contrasena
+     */
+    public void registrarUsuario(String nombre,String apellidos,String email,String contrasena){
         try {
-            PreparedStatement stm = c.prepareStatement("insert into Usuario values(default,?,?,?,0,?);");
+            PreparedStatement stm = c.prepareStatement("insert into Usuario values(default,?,?,?,0,?,null);");
             stm.setString(1,nombre);
             stm.setString(2,apellidos);
             stm.setString(3,email);
             stm.setString(4,contrasena);
+            stm.execute();
+
+            this.nombre=nombre;
+            this.apellidos=apellidos;
+            this.email=email;
+            this.contrasena=contrasena;
 
             stm =c.prepareStatement("select id from usuario where email=?");
             stm.setString(1,email);
@@ -73,10 +89,40 @@ public class Usuario {
             }
             this.saldo=0;
 
-            stm = c.prepareStatement("insert into cesta values (default,0,0,?)");
-            stm.setInt(1,this.id);
+            //Metodo para crear una cesta que se le añadira al usuario
+
         } catch (SQLException e) {
             System.out.println("Algo falla registrarUsuario");
+        }
+    }
+
+    public void cambiarCesta(){
+
+        //Se usara el metodo crear cesta Dani cabron hazlo
+
+        try {
+            PreparedStatement stm = c.prepareStatement("update Usuario set idCesta=? where idUsuario=?");
+            //stm.setInt(1, EL ID DE LA CESTA QUE SE CREARA EN EL METODO ANTERIOR);
+            stm.setInt(2,this.id);
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    /**
+     * Se el pasa un String por parametro que pasara a ser el nuevo email del usuario
+     * @param nuevoEmail
+     */
+    public void cambiarEmail(String nuevoEmail){
+        this.email=nuevoEmail;
+        try {
+            PreparedStatement stm = c.prepareStatement("update usuario set email=? where id=?");
+            stm.setString(1,nuevoEmail);
+            stm.setInt(2,this.id);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 
