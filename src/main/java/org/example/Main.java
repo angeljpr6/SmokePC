@@ -13,7 +13,7 @@ public class Main {
         //usuario.registrarUsuario();
 
         usuario1.iniciarSesion("plinplinplon","pupu");
-        Cesta.eliminarProductoCesta(1,3);
+        Cesta.crearCesta(1);
 
     }
 }

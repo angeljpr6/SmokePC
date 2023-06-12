@@ -46,7 +46,7 @@ public class Cesta {
             stm.setInt(3, idUsuario);
             stm.executeUpdate();
             System.out.println("cesta creada");
-            stm = c.prepareStatement("select id from cesta where idUsuario=1 order by id desc limit 1;");
+            stm = c.prepareStatement("select id from cesta where idUsuario=? order by id desc limit 1;");
             stm.setInt(1,idUsuario);
             ResultSet result = stm.executeQuery();
             while (result.next()){
@@ -55,6 +55,7 @@ public class Cesta {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+        System.out.println(idCesta);
 
         return idCesta;
 
