@@ -26,7 +26,20 @@ public class Productos {
         this.precio = precio;
         this.referencia = referencia;
     }
+    public static void agregarProducto(int stock, String marca, double precio, int referencia) {
+        try {
+            PreparedStatement stm = c.prepareStatement("INSERT INTO Productos (stock, marca, precio, referencia) VALUES (?, ?, ?, ?)");
+            stm.setInt(1, stock);
+            stm.setString(2, marca);
+            stm.setDouble(3, precio);
+            stm.setInt(4, referencia);
+            stm.executeUpdate();
 
+            System.out.println("Producto agregado a la base de datos.");
+        } catch (SQLException e) {
+            System.out.println("Error al agregar el producto a la base de datos: " + e.getMessage());
+        }
+    }
     public static void cambiarPrecio(int referencia, double nuevoPrecio) {
         try {
             PreparedStatement stm = c.prepareStatement("UPDATE Productos SET precio = ? WHERE referencia = ?");
