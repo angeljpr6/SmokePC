@@ -4,9 +4,11 @@ import javax.swing.*;
 
 public class InciarSesion {
     private JPanel panel1;
-    private JTextField textField1;
-    private JPasswordField passwordField1;
+    private JTextField correoElectronico;
+    private JPasswordField contraseña;
     private JButton iniciarButton;
     private JButton crearCuentaButton;
-    private JButton pulsaAquiButton;
+    private JButton esProveedorButton;
+
+
 }

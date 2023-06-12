@@ -12,7 +12,7 @@
     <clientProperties>
       <html.disable class="java.lang.Boolean" value="true"/>
     </clientProperties>
-    <border type="line" title-position="2">
+    <border type="none" title-position="2">
       <font/>
       <title-color color="-15103322"/>
       <color color="-15103322"/>
@@ -26,7 +26,7 @@
           <text value="Iniciar Sesion"/>
         </properties>
       </component>
-      <component id="7f29b" class="javax.swing.JTextField" binding="textField1" default-binding="true">
+      <component id="7f29b" class="javax.swing.JTextField" binding="correoElectronico">
         <constraints>
           <grid row="3" column="1" row-span="1" col-span="5" vsize-policy="0" hsize-policy="6" anchor="0" fill="0" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -50,7 +50,7 @@
           <text value="Contraseña"/>
         </properties>
       </component>
-      <component id="3e554" class="javax.swing.JPasswordField" binding="passwordField1" default-binding="true">
+      <component id="3e554" class="javax.swing.JPasswordField" binding="contraseña">
         <constraints>
           <grid row="5" column="1" row-span="1" col-span="5" vsize-policy="0" hsize-policy="6" anchor="0" fill="0" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -86,7 +86,7 @@
           </grid>
         </constraints>
       </vspacer>
-      <component id="98984" class="javax.swing.JButton" binding="pulsaAquiButton" default-binding="true">
+      <component id="98984" class="javax.swing.JButton" binding="esProveedorButton">
         <constraints>
           <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="1" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
