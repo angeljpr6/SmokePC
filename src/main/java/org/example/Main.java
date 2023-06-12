@@ -13,9 +13,7 @@ public class Main {
         //usuario.registrarUsuario();
 
         usuario1.iniciarSesion("plinplinplon","pupu");
-
-
-        Productos.agregarProducto(120,"Razer",125f,3);
+        Cesta.eliminarProductoCesta(1,3);
 
     }
 }

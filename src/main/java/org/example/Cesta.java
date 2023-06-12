@@ -12,7 +12,7 @@ public class Cesta {
     private int idUsuario;
     private int cantidad;
     private float precioTotal;
-    private Connection c=Principal.getC();
+    private static Connection c=Principal.getC();
 
     public Cesta(int id, int idUsuario, int cantidad, float precioTotal) {
         try {
@@ -35,17 +35,70 @@ public class Cesta {
     }
 
 
-    public void anadirProductos(int idCesta, int referencia){
+
+    public static int crearCesta( int idUsuario) {
+        int idCesta=0;
+
         try {
-            PreparedStatement stm = c.prepareStatement("insert into Tiene (idCesta, referencia ) values(?,?);");
-            stm.setInt(1,1);
-            stm.setInt(2,1);
+            PreparedStatement stm = c.prepareStatement("insert into cesta (id,precioTotal,cantProductos, idUsuario) values (default,?,?,?);");
+            stm.setFloat(1, 0);
+            stm.setInt(2, 0);
+            stm.setInt(3, idUsuario);
+            stm.executeUpdate();
+            System.out.println("cesta creada");
+            stm = c.prepareStatement("select id from cesta where idUsuario=1 order by id desc limit 1;");
+            stm.setInt(1,idUsuario);
+            ResultSet result = stm.executeQuery();
+            while (result.next()){
+                idCesta=result.getInt("id");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return idCesta;
+
+    }
+
+
+    public static void anadirProductos(int idCesta, int referencia){
+        try {
+            PreparedStatement stm = c.prepareStatement("insert into Tiene (idCesta, referenciaProducto ) values(?,?);");
+            stm.setInt(1,idCesta);
+            stm.setInt(2,referencia);
             stm.execute();
             System.out.println("Ingresado satisfactoriamente");
-            stm=c.prepareStatement("update Cesta set cantidad=cantidad+1 where id=?;");
-            stm.setInt(1,this.id);
+            stm=c.prepareStatement("update Cesta set cantproductos=cantproductos+1 where id=?;");
+            stm.setInt(1,idCesta);
             stm.execute();
             System.out.println("Se ha sumado la cantidad");
+            stm=c.prepareStatement("update cesta set precioTotal=precioTotal+(select precio from productos where referencia=?) where id=?;");
+            stm.setInt(1,referencia);
+            stm.setInt(2,idCesta);
+            stm.execute();
+            System.out.println("se ha cambiado el precio de la cesta");
+
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static void eliminarProductoCesta(int idCesta, int referencia){
+        try {
+            PreparedStatement stm = c.prepareStatement("delete from tiene where idCesta=? and referenciaProducto=?");
+            stm.setInt(1,idCesta);
+            stm.setInt(2,referencia);
+            stm.execute();
+            System.out.println("producto eliminado");
+            stm=c.prepareStatement("update Cesta set cantproductos=cantproductos-1 where id=?;");
+            stm.setInt(1,idCesta);
+            stm.execute();
+            System.out.println("cantidad actualizada");
+            stm=c.prepareStatement("update cesta set precioTotal=precioTotal-(select precio from productos where referencia=?) where id=?;");
+            stm.setInt(1,referencia);
+            stm.setInt(2,idCesta);
+            stm.execute();
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
