@@ -15,5 +15,7 @@ public class Main {
         usuario1.iniciarSesion("plinplinplon","pupu");
         Cesta.crearCesta(1);
 
+        Usuario usuario2=new Usuario();
+
     }
 }
