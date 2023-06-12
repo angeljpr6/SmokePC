@@ -6,8 +6,16 @@ public class Main {
         System.out.println("He!");
 
         Principal.initConection();
-        TarjetaCredito tarj =new TarjetaCredito(484373795,"Angel Perez",222,1);
-        Usuario.anadirMetodoPago(tarj);
+
+        Usuario usuario=new Usuario(1,"Pepe","Popo","plinplinplonnn","pupu");
+
+        Usuario usuario1=new Usuario();
+        //usuario.registrarUsuario();
+
+        usuario1.iniciarSesion("plinplinplon","pupu");
+
+
+        Productos.agregarProducto(120,"Razer",125f,3);
 
     }
 }

@@ -11,18 +11,17 @@ public class Cesta {
     private int id;
     private int idUsuario;
     private int cantidad;
-    private double precioTotal;
+    private float precioTotal;
     private Connection c=Principal.getC();
 
-    public Cesta(int id, int idUsuario, int cantidad, double precioTotal, Connection c) {
-        PreparedStatement stm = null;
+    public Cesta(int id, int idUsuario, int cantidad, float precioTotal) {
         try {
-            stm = c.prepareStatement("select * from Cesta where id = ?; ");
+            PreparedStatement stm = c.prepareStatement("select * from Cesta where id = ?; ");
             stm.setInt(1,this.idUsuario);
             ResultSet result= stm.executeQuery();
             this.id=result.getInt("id");
             this.cantidad=result.getInt("cantProductos");
-            this.precioTotal=result.getDouble("precioTotal");
+            this.precioTotal=result.getFloat("precioTotal");
         } catch (SQLException e) {
             System.out.println("te fumaste");
         }
@@ -34,6 +33,7 @@ public class Cesta {
         this.c = c;
 
     }
+
 
     public void anadirProductos(int idCesta, int referencia){
         try {
@@ -50,10 +50,37 @@ public class Cesta {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-
-
-
     }
 
+    public int getId() {
+        return id;
+    }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    public float getPrecioTotal() {
+        return precioTotal;
+    }
+
+    public void setPrecioTotal(float precioTotal) {
+        this.precioTotal = precioTotal;
+    }
 }
