@@ -13,7 +13,9 @@ public class Main {
         //usuario.registrarUsuario();
 
         usuario1.iniciarSesion("plinplinplon","pupu");
-        Cesta.crearCesta(1);
+        Proveedor proveedor1=new Proveedor(4,"lucas_fumon@hotmail","tuperra");
+        proveedor1.añadirProducto(2,"porro",20,"colaaa");
+
 
         Usuario usuario2=new Usuario();
 
