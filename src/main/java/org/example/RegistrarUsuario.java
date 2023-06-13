@@ -9,5 +9,5 @@ public class RegistrarUsuario {
     private JPasswordField passwordField2;
     private JButton crearCuentaButton;
     private JCheckBox cuentaDeProveedorCheckBox;
-    private JButton button1;
+    private JButton necesitasAyudaButton;
 }
