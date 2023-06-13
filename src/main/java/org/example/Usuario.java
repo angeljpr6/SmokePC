@@ -11,7 +11,6 @@ public class Usuario {
     private String nombre;
     private String apellidos;
     private String email;
-    private Cesta cesta;
     private float saldo;
     private static Connection c=Principal.getC();
     private String contrasena;
@@ -218,14 +217,6 @@ public class Usuario {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public Cesta getCesta() {
-        return cesta;
-    }
-
-    public void setCesta(Cesta cesta) {
-        this.cesta = cesta;
     }
 
     public float getSaldo() {
