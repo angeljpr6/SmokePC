@@ -75,7 +75,7 @@
           <font name="Roboto Light"/>
           <foreground color="-196615"/>
           <horizontalTextPosition value="0"/>
-          <icon value="org/example/Iconos/menos (4).png"/>
+          <icon value="menos (4).png"/>
           <text value="Iniciar"/>
         </properties>
       </component>
@@ -96,7 +96,7 @@
           <contentAreaFilled value="false"/>
           <foreground color="-1"/>
           <horizontalTextPosition value="0"/>
-          <icon value="org/example/Iconos/menos (4).png"/>
+          <icon value="menos (4).png"/>
           <iconTextGap value="0"/>
           <inheritsPopupMenu value="true"/>
           <opaque value="false"/>
@@ -121,7 +121,7 @@
           <contentAreaFilled value="false"/>
           <foreground color="-1"/>
           <horizontalTextPosition value="0"/>
-          <icon value="org/example/Iconos/menos (4).png"/>
+          <icon value="menos (4).png"/>
           <text value="Crear Cuenta"/>
         </properties>
       </component>

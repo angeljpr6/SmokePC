@@ -102,6 +102,11 @@ public class Proveedor {
 
     }
 
+    /**
+     * método que el proovedor deje de proveer un producto
+     * @param referencia
+     */
+
     public void eliminarProducto(int referencia){
         try {
             PreparedStatement stm = c.prepareStatement("update productos set stock=0 where referencia=?;");
