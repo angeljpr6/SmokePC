@@ -1,7 +1,7 @@
 package org.example;
 
 import javax.swing.*;
-
+import java.awt.event.*;
 public class RegistrarUsuario {
     private JPanel panel1;
     private JTextField textField1;
@@ -9,5 +9,5 @@ public class RegistrarUsuario {
     private JPasswordField passwordField2;
     private JButton crearCuentaButton;
     private JCheckBox cuentaDeProveedorCheckBox;
-    private JButton necesitasAyudaButton;
+    private JButton button1;
 }

@@ -101,7 +101,7 @@
           </component>
         </children>
       </grid>
-      <component id="dc366" class="javax.swing.JButton" binding="necesitasAyudaButton" default-binding="true">
+      <component id="dc366" class="javax.swing.JButton" binding="button1" default-binding="true">
         <constraints>
           <grid row="10" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -111,7 +111,7 @@
           <foreground color="-1"/>
           <horizontalTextPosition value="0"/>
           <icon value="org/example/Iconos/menos (4).png"/>
-          <text value="¿Necesitas ayuda?"/>
+          <text value="Button"/>
         </properties>
       </component>
       <component id="a0815" class="javax.swing.JLabel">
