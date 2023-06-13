@@ -7,35 +7,20 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ * @author daniel perez
+ * clase cesta
+ */
+
 public class Cesta {
-    private int id;
-    private int idUsuario;
-    private int cantidad;
-    private float precioTotal;
     private static Connection c=Principal.getC();
 
-    public Cesta(int id, int idUsuario, int cantidad, float precioTotal) {
-        try {
-            PreparedStatement stm = c.prepareStatement("select * from Cesta where id = ?; ");
-            stm.setInt(1,this.idUsuario);
-            ResultSet result= stm.executeQuery();
-            this.id=result.getInt("id");
-            this.cantidad=result.getInt("cantProductos");
-            this.precioTotal=result.getFloat("precioTotal");
-        } catch (SQLException e) {
-            System.out.println("te fumaste");
-        }
 
-        this.id = id;
-        this.idUsuario = idUsuario;
-        this.cantidad = cantidad;
-        this.precioTotal = precioTotal;
-        this.c = c;
-
-    }
-
-
-
+     /**
+     * Método para crear una cesta vinculada a un usuario en la base de datos
+     * @param idUsuario
+     * @return devuelve el ID de la cesta
+     */
     public static int crearCesta( int idUsuario) {
         int idCesta=0;
 
@@ -61,6 +46,12 @@ public class Cesta {
 
     }
 
+    /**
+     * metodo para añadir producto a la cesta
+     * @param idCesta
+     * @param referencia
+     */
+
 
     public static void anadirProductos(int idCesta, int referencia){
         try {
@@ -85,6 +76,12 @@ public class Cesta {
         }
     }
 
+    /**
+     * metodo para eliminar producto de la cesta
+     * @param idCesta
+     * @param referencia
+     */
+
     public static void eliminarProductoCesta(int idCesta, int referencia){
         try {
             PreparedStatement stm = c.prepareStatement("delete from tiene where idCesta=? and referenciaProducto=?");
@@ -106,35 +103,5 @@ public class Cesta {
         }
     }
 
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getIdUsuario() {
-        return idUsuario;
-    }
-
-    public void setIdUsuario(int idUsuario) {
-        this.idUsuario = idUsuario;
-    }
-
-    public int getCantidad() {
-        return cantidad;
-    }
-
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
-    }
-
-    public float getPrecioTotal() {
-        return precioTotal;
-    }
-
-    public void setPrecioTotal(float precioTotal) {
-        this.precioTotal = precioTotal;
-    }
 }

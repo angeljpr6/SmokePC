@@ -13,7 +13,11 @@ public class Main {
         //usuario.registrarUsuario();
 
         usuario1.iniciarSesion("plinplinplon","pupu");
-        Cesta.crearCesta(1);
+        Proveedor proveedor1=new Proveedor(4,"lucas_fumon@hotmail","tuperra");
+        proveedor1.eliminarProducto(1);
+
+
+        Usuario usuario2=new Usuario();
 
     }
 }
