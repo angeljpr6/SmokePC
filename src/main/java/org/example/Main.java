@@ -7,7 +7,7 @@ public class Main {
 
         Principal.initConection();
 
-        Usuario usuario=new Usuario(1,"Pepe","Popo","plinplinplonnn","pupu");
+        /*Usuario usuario=new Usuario(1,"Pepe","Popo","plinplinplonnn","pupu");
 
         Usuario usuario1=new Usuario();
         //usuario.registrarUsuario();
@@ -17,7 +17,7 @@ public class Main {
         proveedor1.eliminarProducto(1);
 
 
-        Usuario usuario2=new Usuario();
+        Usuario usuario2=new Usuario();*/
 
     }
 }
