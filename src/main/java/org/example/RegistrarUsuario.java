@@ -1,13 +1,13 @@
 package org.example;
 
 import javax.swing.*;
-import java.awt.event.*;
+
 public class RegistrarUsuario {
-    private JPanel panel1;
+    private JPanel panelPrincipal;
     private JTextField textField1;
     private JPasswordField passwordField1;
     private JPasswordField passwordField2;
     private JButton crearCuentaButton;
     private JCheckBox cuentaDeProveedorCheckBox;
-    private JButton button1;
+    private JButton iniciarSesionButton;
 }
