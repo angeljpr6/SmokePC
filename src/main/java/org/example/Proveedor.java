@@ -101,4 +101,20 @@ public class Proveedor {
         }
 
     }
+
+    public void eliminarProducto(int referencia){
+        try {
+            PreparedStatement stm = c.prepareStatement("update from productos set stock=0 where referencia=?;");
+            stm.setInt(1,referencia);
+            stm.execute();
+            System.out.println("stock actualizado a 0");
+
+            stm=c.prepareStatement("delete from proveen where refProduct=?;");
+            stm.setInt(1,referencia);
+            System.out.println("Tabla proveen actualizada");
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());;
+        }
+    }
 }
