@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class InciarSesion extends JFrame {
+public class IniciarSesion extends JFrame {
 
     private JTextField correoElectronico;
     private JPasswordField contraseña;
@@ -15,7 +15,7 @@ public class InciarSesion extends JFrame {
     private JPanel panelPrincipal;
 
     private Usuario usuario;
-    public InciarSesion(){
+    public IniciarSesion(){
         this.setContentPane(panelPrincipal);
         this.pack();
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -34,14 +34,9 @@ public class InciarSesion extends JFrame {
         EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new InciarSesion().setVisible(true);
+                new IniciarSesion().setVisible(true);
 
             }
         });
     }
-
-
-
-
-
 }
