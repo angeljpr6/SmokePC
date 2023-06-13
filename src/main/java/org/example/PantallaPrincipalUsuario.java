@@ -5,7 +5,6 @@ import java.awt.event.AdjustmentEvent;
 import java.awt.event.AdjustmentListener;
 
 public class PantallaPrincipalUsuario {
-    private JComboBox productos;
     private JTextField textField1;
     private JButton verMasButton;
     private JScrollBar scrollBar1;
