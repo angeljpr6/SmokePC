@@ -1,5 +1,6 @@
 package org.example;
 
+import javax.swing.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,7 +16,6 @@ public class Proveedor {
     private String email;
     private String contraseña;
     private static Connection c=Principal.getC();
-
     public Proveedor(int id, String email, String contraseña) {
         this.id = id;
         this.email = email;
@@ -101,6 +101,11 @@ public class Proveedor {
         }
 
     }
+
+    /**
+     * método que el proovedor deje de proveer un producto
+     * @param referencia
+     */
 
     public void eliminarProducto(int referencia){
         try {
