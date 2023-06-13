@@ -104,7 +104,7 @@ public class Proveedor {
 
     public void eliminarProducto(int referencia){
         try {
-            PreparedStatement stm = c.prepareStatement("update from productos set stock=0 where referencia=?;");
+            PreparedStatement stm = c.prepareStatement("update productos set stock=0 where referencia=?;");
             stm.setInt(1,referencia);
             stm.execute();
             System.out.println("stock actualizado a 0");
