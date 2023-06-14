@@ -85,7 +85,7 @@
               <contentAreaFilled value="false"/>
               <foreground color="-1"/>
               <horizontalTextPosition value="0"/>
-              <icon value="org/example/Iconos/menos (4).png"/>
+              <icon value="menos (4).png"/>
               <text value="Crear cuenta"/>
             </properties>
           </component>
@@ -110,7 +110,7 @@
           <contentAreaFilled value="false"/>
           <foreground color="-1"/>
           <horizontalTextPosition value="0"/>
-          <icon value="org/example/Iconos/menos (4).png"/>
+          <icon value="menos (4).png"/>
           <text value="Iniciar Sesion"/>
         </properties>
       </component>
