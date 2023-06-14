@@ -1,9 +1,10 @@
 package org.example;
+
 import javax.swing.*;
-import java.awt.*;
-
 import javax.swing.table.DefaultTableModel;
-
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,15 +15,34 @@ public class InterfazPrincipalProovedor extends JFrame {
     private JPanel panel1;
     private JScrollBar scrollBar1;
     private JButton agregarProductosButton;
+    private JTextField textFieldStock;
+    private JTextField textFieldMarca;
+    private JTextField textFieldPrecio;
+    private JTextField textFieldReferencia;
 
     private static Connection c;
 
-    public InterfazPrincipalProovedor()  {
+    public InterfazPrincipalProovedor() {
         this.setContentPane(panel1);
         this.pack();
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        mostrarProductos.setLayout(new BorderLayout());
+        agregarProductosButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Obtener los datos del producto desde la interfaz (por ejemplo, mediante JTextField)
+                int stock = Integer.parseInt(textFieldStock.getText());
+                String marca = textFieldMarca.getText();
+                double precio = Double.parseDouble(textFieldPrecio.getText());
+                int referencia = Integer.parseInt(textFieldReferencia.getText());
+
+                // Llamar al método agregarProducto de la clase Productos
+                Productos.agregarProducto(stock, marca, precio, referencia);
+
+                // Actualizar la visualización de los productos (opcional)
+                actualizarProductos();
+            }
+        });
 
         // Obtener los datos de los productos desde la base de datos
         String[][] productos = obtenerProductosDesdeBaseDeDatos();
@@ -34,11 +54,17 @@ public class InterfazPrincipalProovedor extends JFrame {
         // Crear la tabla utilizando el modelo de tabla
         JTable tablaProductos = new JTable(model);
 
-        // Establecer la tabla dentro del JScrollPane
-        JScrollPane scrollPane = new JScrollPane(tablaProductos);
+        // Crear un panel para la tabla y establecer su diseño
+        JPanel panelTabla = new JPanel(new BorderLayout());
+        panelTabla.add(tablaProductos.getTableHeader(), BorderLayout.NORTH);
+        panelTabla.add(new JScrollPane(tablaProductos), BorderLayout.CENTER);
 
-        // Agregar el JScrollPane al panel mostrarProductos en la posición deseada (centro)
-        mostrarProductos.add(scrollPane, BorderLayout.CENTER);
+        // Agregar el panelTabla al panel mostrarProductos en el centro
+        mostrarProductos.setLayout(new BorderLayout());
+        mostrarProductos.add(panelTabla, BorderLayout.CENTER);
+
+        // Agregar el JScrollBar al panel mostrarProductos en el lado derecho
+        mostrarProductos.add(scrollBar1, BorderLayout.EAST);
 
         // Configurar el GridBagConstraints para el panel mostrarProductos en el panel1
         GridBagConstraints gbc = new GridBagConstraints();
@@ -51,6 +77,25 @@ public class InterfazPrincipalProovedor extends JFrame {
         // Agregar el panel mostrarProductos al panel1 utilizando GridBagLayout
         panel1.setLayout(new GridBagLayout());
         panel1.add(mostrarProductos, gbc);
+    }
+
+    private void actualizarProductos() {
+        // Obtener los datos de los productos desde la base de datos
+        String[][] productos = obtenerProductosDesdeBaseDeDatos();
+
+        // Obtener el panelTabla desde el panel mostrarProductos
+        JPanel panelTabla = (JPanel) mostrarProductos.getComponent(0);
+
+        // Obtener la tabla existente desde el panelTabla
+        JTable tablaProductos = (JTable) ((JScrollPane) panelTabla.getComponent(1)).getViewport().getView();
+
+        // Actualizar el modelo de la tabla existente con los nuevos datos
+        DefaultTableModel model = (DefaultTableModel) tablaProductos.getModel();
+        model.setDataVector(productos, new String[]{"ID", "Nombre", "Precio"});
+
+        // Actualizar la visualización
+        revalidate();
+        repaint();
     }
 
     static String[][] obtenerProductosDesdeBaseDeDatos() {
