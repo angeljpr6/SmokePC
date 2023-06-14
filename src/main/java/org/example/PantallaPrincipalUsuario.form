@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="org.example.PantallaPrincipalUsuario">
-  <grid id="27dc6" layout-manager="GridLayoutManager" row-count="5" column-count="5" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" binding="panelPrincipal" layout-manager="GridLayoutManager" row-count="5" column-count="5" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="20" y="20" width="524" height="638"/>
+      <xy x="20" y="20" width="562" height="655"/>
     </constraints>
     <properties>
       <background color="-1"/>
@@ -40,7 +40,7 @@
         </properties>
         <border type="none"/>
         <children>
-          <grid id="d75da" layout-manager="GridLayoutManager" row-count="4" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="d75da" layout-manager="GridLayoutManager" row-count="4" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -96,6 +96,14 @@
                   </grid>
                 </constraints>
               </vspacer>
+              <component id="dd6a6" class="javax.swing.JLabel" binding="producto1">
+                <constraints>
+                  <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Label"/>
+                </properties>
+              </component>
             </children>
           </grid>
           <grid id="18f54" layout-manager="GridLayoutManager" row-count="4" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
@@ -307,7 +315,20 @@
           <foreground color="-1"/>
           <horizontalTextPosition value="0"/>
           <icon value="menos (4).png"/>
-          <text value="ver mas"/>
+          <text value="Ajustes"/>
+        </properties>
+      </component>
+      <component id="6831f" class="javax.swing.JButton" binding="cestaButton">
+        <constraints>
+          <grid row="1" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <borderPainted value="false"/>
+          <contentAreaFilled value="false"/>
+          <foreground color="-1"/>
+          <horizontalTextPosition value="0"/>
+          <icon value="menos (4).png"/>
+          <text value="Cesta"/>
         </properties>
       </component>
     </children>

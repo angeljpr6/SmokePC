@@ -41,16 +41,16 @@ public class Usuario {
             PreparedStatement stm = c.prepareStatement("select * from usuario where contrasena=? and email=?;");
             stm.setString(1,contrasena);
             stm.setString(2,email);
-            stm.execute();
             ResultSet result = stm.executeQuery();
-            while (result.next()) {
+            if (result.next()){
                 this.id=result.getInt("id");
                 this.nombre=result.getString("nombre");
                 this.apellidos=result.getString("apellidos");
                 this.saldo=result.getFloat("saldo");
+                System.out.println("Sesion iniciada");
+            }else System.out.println("Email o contraseña incorrectos");
 
-            }
-            System.out.println("Sesion iniciada");
+
 
         } catch (SQLException e) {
             System.out.println("Email o contraseña incorrectos");
