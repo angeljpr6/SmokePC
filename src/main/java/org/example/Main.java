@@ -15,7 +15,7 @@ public class Main {
 
         usuario1.iniciarSesion("plinplinplon","pupu");
         Proveedor proveedor1=new Proveedor(4,"lucas_fumon@hotmail","tuperra");
-        proveedor1.eliminarProducto(1);
+
 
 
         Usuario usuario2=new Usuario();

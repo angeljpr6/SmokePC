@@ -29,6 +29,30 @@ public class Proveedor {
         this.contraseña="";
     }
 
+
+    /**
+     * Se le pasa un email y una contraseña por parametro e inicia sesion si son correctos
+     * @param email
+     * @param contraseña
+     */
+    public void iniciarSesion(String email,String contraseña){
+        try {
+            PreparedStatement stm = c.prepareStatement("select * from proveedor where contraseña=? and email=?;");
+            stm.setString(1,contraseña);
+            stm.setString(2,email);
+            ResultSet result = stm.executeQuery();
+            if (result.next()){
+                this.id=result.getInt("id");
+                System.out.println("Sesion iniciada");
+            }else System.out.println("Email o contraseña incorrectos");
+
+
+
+        } catch (SQLException e) {
+            System.out.println("Email o contraseña incorrectos");
+        }
+    }
+
     /**
      * metodo para registrar proveedor en la base de datos
      * @param email
