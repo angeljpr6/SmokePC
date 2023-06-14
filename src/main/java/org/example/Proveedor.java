@@ -16,6 +16,7 @@ public class Proveedor {
     private String email;
     private String contraseña;
     private static Connection c=Principal.getC();
+
     public Proveedor(int id, String email, String contraseña) {
         this.id = id;
         this.email = email;
@@ -145,5 +146,38 @@ public class Proveedor {
         } catch (SQLException e) {
             System.out.println(e.getMessage());;
         }
+    }
+
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getContraseña() {
+        return contraseña;
+    }
+
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
+    }
+
+    public static Connection getC() {
+        return c;
+    }
+
+    public static void setC(Connection c) {
+        Proveedor.c = c;
     }
 }
