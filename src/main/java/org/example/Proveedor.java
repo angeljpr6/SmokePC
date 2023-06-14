@@ -16,6 +16,7 @@ public class Proveedor {
     private String email;
     private String contraseña;
     private static Connection c=Principal.getC();
+
     public Proveedor(int id, String email, String contraseña) {
         this.id = id;
         this.email = email;
@@ -27,6 +28,30 @@ public class Proveedor {
         this.id=0;
         this.email="";
         this.contraseña="";
+    }
+
+
+    /**
+     * Se le pasa un email y una contraseña por parametro e inicia sesion si son correctos
+     * @param email
+     * @param contraseña
+     */
+    public void iniciarSesion(String email,String contraseña){
+        try {
+            PreparedStatement stm = c.prepareStatement("select * from proveedor where contraseña=? and email=?;");
+            stm.setString(1,contraseña);
+            stm.setString(2,email);
+            ResultSet result = stm.executeQuery();
+            if (result.next()){
+                this.id=result.getInt("id");
+                System.out.println("Sesion iniciada");
+            }else System.out.println("Email o contraseña incorrectos");
+
+
+
+        } catch (SQLException e) {
+            System.out.println("Email o contraseña incorrectos");
+        }
     }
 
     /**
@@ -121,5 +146,38 @@ public class Proveedor {
         } catch (SQLException e) {
             System.out.println(e.getMessage());;
         }
+    }
+
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getContraseña() {
+        return contraseña;
+    }
+
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
+    }
+
+    public static Connection getC() {
+        return c;
+    }
+
+    public static void setC(Connection c) {
+        Proveedor.c = c;
     }
 }
