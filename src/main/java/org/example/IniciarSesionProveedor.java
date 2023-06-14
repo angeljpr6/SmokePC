@@ -35,7 +35,7 @@ public class IniciarSesionProveedor extends JFrame{
                 proveedor1.iniciarSesion(correo,contrasena);
                 System.out.println(proveedor1.getId());
                 if (proveedor1.getId()!=0) {
-                    new PantallaPrincipalUsuario().setVisible(true);
+                    new InterfazPrincipalProovedor().setVisible(true);
                 }
                 dispose();
             }

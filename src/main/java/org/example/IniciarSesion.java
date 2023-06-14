@@ -41,7 +41,7 @@ public class IniciarSesion extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 //Esto de abajo lo necesito cuando se ejecute InterfazPrincipal Proovedore
                  Principal.initConection();
-                new InterfazPrincipalProovedor().setVisible(true);
+                new IniciarSesionProveedor().setVisible(true);
                 dispose();
             }
         });
