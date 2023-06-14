@@ -8,25 +8,23 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 public class InterfazPrincipalProovedor extends JFrame {
-    private JPanel panelPrincipal;
-    private JScrollPane mostrarProductos;
+
+    private JPanel mostrarProductos;
     private JPanel panel1;
     private JScrollBar scrollBar1;
     private JButton agregarProductosButton;
 
-    private static Connection c = Principal.getC();
+    private static Connection c;
 
 
-    public InterfazPrincipalProovedor() {
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setTitle("Interfaz Principal Proveedor");
-        setSize(600, 400);
+    public InterfazPrincipalProovedor()  {
 
-        panelPrincipal = new JPanel();
-        mostrarProductos = new JScrollPane();
+        this.setContentPane(panel1);
+        this.pack();
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        // Establecer la conexión a la base de datos
-        c = Principal.getC();
+/*
+        panelPrincipal = new JPanel(new GridLayout(1, 1)); // Utilizar GridLayout de 1 fila y 1 columna
 
         // Obtener los datos de los productos desde la base de datos
         String[][] productos = obtenerProductosDesdeBaseDeDatos();
@@ -39,26 +37,26 @@ public class InterfazPrincipalProovedor extends JFrame {
         JTable tablaProductos = new JTable(model);
 
         // Establecer la tabla dentro del JScrollPane
-        mostrarProductos.setViewportView(tablaProductos);
+      //  mostrarProductos = new JPanel(tablaProductos);
 
-        // Establecer el JScrollPane en el panel principal
-        panelPrincipal.setLayout(new BorderLayout());
-        panelPrincipal.add(mostrarProductos, BorderLayout.CENTER);
+        // Agregar el JScrollPane al panel principal
+        panelPrincipal.add(mostrarProductos);
 
         // Agregar el panel principal al JFrame
         setContentPane(panelPrincipal);
+        */
+
     }
+
 
     static String[][] obtenerProductosDesdeBaseDeDatos() {
         String[][] productos = null;
 
         try {
             // Crear la consulta SQL para obtener los productos
-            String consulta  =  c.prepareStatement( "SELECT * FROM Productos").toString();
-
-            // Ejecutar la consulta
-            Statement statement =  c.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            ResultSet resultSet = statement.executeQuery(consulta);
+            PreparedStatement stm = Principal.getC().prepareStatement("select * from Productos");
+            stm.execute();
+            ResultSet resultSet = stm.getResultSet();
 
             // Obtener el número de columnas del ResultSet
             ResultSetMetaData metaData = resultSet.getMetaData();
@@ -84,22 +82,12 @@ public class InterfazPrincipalProovedor extends JFrame {
 
             // Cerrar el ResultSet y el Statement
             resultSet.close();
-            statement.close();
-
+            stm.close();
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException("Error al obtener los productos desde la base de datos.", e);
         }
 
         return productos;
-    }
-
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new InterfazPrincipalProovedor().setVisible(true);
-            }
-        });
     }
 }

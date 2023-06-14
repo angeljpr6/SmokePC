@@ -97,7 +97,7 @@ public class Usuario {
 
     public void cambiarCesta(){
 
-        //Se usara el metodo crear cesta Dani cabron hazlo
+        //Se usará el metodo crear cesta Dani cabron hazlo
 
         try {
             PreparedStatement stm = c.prepareStatement("update Usuario set idCesta=? where idUsuario=?");
@@ -144,7 +144,7 @@ public class Usuario {
         }
     }
     /**
-     * Te enseña la Compra de ticket en especifico
+     * Te enseña la Compra de ticket en específico
      *
      * @param ticket
      */

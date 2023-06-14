@@ -33,10 +33,13 @@ public class IniciarSesion extends JFrame {
                 }
             }
         });
-        iniciarButton.addActionListener(new ActionListener() {
+
+        esProveedorButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                //Esto de abajo lo necesito cuando se ejecute InterfazPrincipal Proovedor
+             // Principal.initConection();
+                new IniciarSesionProveedor().setVisible(true);
             }
         });
     }
