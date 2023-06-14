@@ -29,10 +29,12 @@ public class IniciarSesion extends JFrame {
                 usuario.iniciarSesion(email,contrasena);
                 System.out.println(usuario.getId());
                 if (usuario.getId()!=0) {
-                    new InterfazPrincipalProovedor().setVisible(true);
+                    new PantallaPrincipalUsuario().setVisible(true);
+                    dispose();
                 }
             }
         });
+
 
         esProveedorButton.addActionListener(new ActionListener() {
             @Override
@@ -40,6 +42,14 @@ public class IniciarSesion extends JFrame {
                 //Esto de abajo lo necesito cuando se ejecute InterfazPrincipal Proovedore
              // Principal.initConection();
                 new IniciarSesionProveedor().setVisible(true);
+                dispose();
+            }
+        });
+        crearCuentaButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new RegistrarUsuario().setVisible(true);
+                dispose();
             }
         });
     }
@@ -52,5 +62,13 @@ public class IniciarSesion extends JFrame {
 
             }
         });
+    }
+
+    public static Usuario getUsuario() {
+        return usuario;
+    }
+
+    public static void setUsuario(Usuario usuario) {
+        IniciarSesion.usuario = usuario;
     }
 }
