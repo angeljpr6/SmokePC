@@ -34,14 +34,7 @@ public class IniciarSesion extends JFrame {
             }
         });
 
-        esProveedorButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //Esto de abajo lo necesito cuando se ejecute InterfazPrincipal Proovedor
-             // Principal.initConection();
-                new IniciarSesionProveedor().setVisible(true);
-            }
-        });
+
     }
 
     public static void main(String[] args) {
