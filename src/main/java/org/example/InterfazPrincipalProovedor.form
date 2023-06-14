@@ -65,6 +65,7 @@
               <focusPainted value="false"/>
               <foreground color="-1"/>
               <horizontalTextPosition value="0"/>
+              <icon value="menos (4).png"/>
               <opaque value="false"/>
               <text value="Agregar Productos"/>
             </properties>

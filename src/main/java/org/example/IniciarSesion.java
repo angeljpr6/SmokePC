@@ -14,15 +14,29 @@ public class IniciarSesion extends JFrame {
     private JButton esProveedorButton;
     private JPanel panelPrincipal;
 
-    private Usuario usuario;
+    private static Usuario usuario;
     public IniciarSesion(){
         this.setContentPane(panelPrincipal);
         this.pack();
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        Principal.initConection();
         usuario = new Usuario();
         iniciarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                String email = correoElectronico.getText();
+                String contrasena = new String(contraseña.getPassword());
+                usuario.iniciarSesion(email,contrasena);
+                System.out.println(usuario.getId());
+                if (usuario.getId()!=0) {
+                    new PantallaPrincipalUsuario().setVisible(true);
+                }
+            }
+        });
+        iniciarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
            String email = correoElectronico.getText();
            String contrasena = new String(contraseña.getPassword());
                  usuario.iniciarSesion(contrasena, email);
