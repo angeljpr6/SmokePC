@@ -23,9 +23,18 @@ public class IniciarSesion extends JFrame {
         iniciarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String email = correoElectronico.getText();
-                String contrasena = new String(contraseña.getPassword());
-                usuario.iniciarSesion(contrasena, email);
+           String email = correoElectronico.getText();
+           String contrasena = new String(contraseña.getPassword());
+                 usuario.iniciarSesion(contrasena, email);
+
+            }
+        });
+        esProveedorButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //Esto de abajo lo necesito cuando se ejecute InterfazPrincipal Proovedor
+             // Principal.initConection();
+                new IniciarSesionProveedor().setVisible(true);
             }
         });
     }
