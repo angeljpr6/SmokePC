@@ -29,7 +29,7 @@ public class IniciarSesion extends JFrame {
                 usuario.iniciarSesion(email,contrasena);
                 System.out.println(usuario.getId());
                 if (usuario.getId()!=0) {
-                    new PantallaPrincipalUsuario().setVisible(true);
+                    new InterfazPrincipalProovedor().setVisible(true);
                 }
             }
         });
