@@ -7,6 +7,7 @@ import javax.swing.table.DefaultTableModel;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+
 public class InterfazPrincipalProovedor extends JFrame {
 
     private JPanel mostrarProductos;
@@ -16,15 +17,12 @@ public class InterfazPrincipalProovedor extends JFrame {
 
     private static Connection c;
 
-
     public InterfazPrincipalProovedor()  {
-
         this.setContentPane(panel1);
         this.pack();
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-/*
-        panelPrincipal = new JPanel(new GridLayout(1, 1)); // Utilizar GridLayout de 1 fila y 1 columna
+        mostrarProductos.setLayout(new BorderLayout());
 
         // Obtener los datos de los productos desde la base de datos
         String[][] productos = obtenerProductosDesdeBaseDeDatos();
@@ -37,17 +35,23 @@ public class InterfazPrincipalProovedor extends JFrame {
         JTable tablaProductos = new JTable(model);
 
         // Establecer la tabla dentro del JScrollPane
-      //  mostrarProductos = new JPanel(tablaProductos);
+        JScrollPane scrollPane = new JScrollPane(tablaProductos);
 
-        // Agregar el JScrollPane al panel principal
-        panelPrincipal.add(mostrarProductos);
+        // Agregar el JScrollPane al panel mostrarProductos en la posición deseada (centro)
+        mostrarProductos.add(scrollPane, BorderLayout.CENTER);
 
-        // Agregar el panel principal al JFrame
-        setContentPane(panelPrincipal);
-        */
+        // Configurar el GridBagConstraints para el panel mostrarProductos en el panel1
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.weightx = 1.0;
+        gbc.weighty = 1.0;
+        gbc.fill = GridBagConstraints.BOTH;
 
+        // Agregar el panel mostrarProductos al panel1 utilizando GridBagLayout
+        panel1.setLayout(new GridBagLayout());
+        panel1.add(mostrarProductos, gbc);
     }
-
 
     static String[][] obtenerProductosDesdeBaseDeDatos() {
         String[][] productos = null;
