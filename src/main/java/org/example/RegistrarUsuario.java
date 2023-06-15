@@ -50,6 +50,16 @@ public class RegistrarUsuario extends JFrame{
                 }
             }
         });
+
+        iniciarSesionButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new IniciarSesion().setVisible(true);
+                // Cerrar la ventana actual
+                dispose();
+
+            }
+        });
         cuentaDeProveedorCheckBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
