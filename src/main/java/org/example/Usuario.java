@@ -18,7 +18,7 @@ public class Usuario {
 
 
 
-    public Usuario(int id, String nombre, String apellidos, String email, String contrasena){
+    public Usuario(int id, String nombre, String apellidos, String email, float saldo, String contrasena){
         this.id=id;
         this.nombre=nombre;
         this.apellidos=apellidos;
@@ -204,6 +204,7 @@ public class Usuario {
             while (result.next()) {
                 precio=result.getInt("precioTotal");
             }
+            System.out.println(precio);
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
