@@ -51,6 +51,7 @@ public class Usuario {
                 this.nombre=result.getString("nombre");
                 this.apellidos=result.getString("apellidos");
                 this.saldo=result.getFloat("saldo");
+                this.contrasena=result.getString("contrasena");
                 System.out.println("Sesion iniciada");
             }else System.out.println("Email o contraseña incorrectos");
 
