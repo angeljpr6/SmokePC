@@ -9,6 +9,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.example.Proveedor.obtenerProductosDesdeBaseDeDatos;
+
 public class InterfazPrincipalProovedor extends JFrame {
 
     private JPanel mostrarProductos;
@@ -34,13 +36,13 @@ public class InterfazPrincipalProovedor extends JFrame {
                 int stock = Integer.parseInt(textFieldStock.getText());
                 String marca = textFieldMarca.getText();
                 double precio = Double.parseDouble(textFieldPrecio.getText());
-                int referencia = Integer.parseInt(textFieldReferencia.getText());
+                String nombre = textFieldReferencia.getText();
 
                 // Llamar al método agregarProducto de la clase Productos
-                Productos.agregarProducto(stock, marca, precio, referencia);
+                Productos.agregarProducto(stock, marca, precio, nombre);
 
-                // Actualizar la visualización de los productos (opcional)
-                actualizarProductos();
+                // Actualizar la visualización de los productos (No funciona)
+                //actualizarProductos();
             }
         });
 
@@ -48,11 +50,17 @@ public class InterfazPrincipalProovedor extends JFrame {
         String[][] productos = obtenerProductosDesdeBaseDeDatos();
 
         // Crear un modelo de tabla para almacenar los datos de los productos
-        String[] columnas = {"ID", "Nombre", "Precio"};
-        DefaultTableModel model = new DefaultTableModel(productos, columnas);
+        String[] columnas = {"Precio", "Nombre", "Marca", "Stock"};
+        DefaultTableModel model = new DefaultTableModel(productos, columnas) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false; // Hacer que la tabla sea no editable
+            }
+        };
 
         // Crear la tabla utilizando el modelo de tabla
         JTable tablaProductos = new JTable(model);
+
 
         // Crear un panel para la tabla y establecer su diseño
         JPanel panelTabla = new JPanel(new BorderLayout());
@@ -79,7 +87,9 @@ public class InterfazPrincipalProovedor extends JFrame {
         panel1.add(mostrarProductos, gbc);
     }
 
-    private void actualizarProductos() {
+  /*
+                ¡¡¡¡¡ WORK IN PROGRESS!!!!
+     private void actualizarProductos() {
         // Obtener los datos de los productos desde la base de datos
         String[][] productos = obtenerProductosDesdeBaseDeDatos();
 
@@ -91,52 +101,12 @@ public class InterfazPrincipalProovedor extends JFrame {
 
         // Actualizar el modelo de la tabla existente con los nuevos datos
         DefaultTableModel model = (DefaultTableModel) tablaProductos.getModel();
-        model.setDataVector(productos, new String[]{"ID", "Nombre", "Precio"});
+        model.setDataVector(productos, new String[]{"Precio", "Nombre", "Marca", "Stock"});
 
         // Actualizar la visualización
         revalidate();
         repaint();
-    }
+    } */
 
-    static String[][] obtenerProductosDesdeBaseDeDatos() {
-        String[][] productos = null;
 
-        try {
-            // Crear la consulta SQL para obtener los productos
-            PreparedStatement stm = Principal.getC().prepareStatement("select * from Productos");
-            stm.execute();
-            ResultSet resultSet = stm.getResultSet();
-
-            // Obtener el número de columnas del ResultSet
-            ResultSetMetaData metaData = resultSet.getMetaData();
-            int columnas = metaData.getColumnCount();
-
-            // Crear una lista para almacenar los datos de los productos
-            List<String[]> listaProductos = new ArrayList<>();
-
-            // Recorrer el ResultSet y guardar los datos en la lista
-            while (resultSet.next()) {
-                String[] producto = new String[columnas];
-                for (int columna = 0; columna < columnas; columna++) {
-                    producto[columna] = resultSet.getString(columna + 1);
-                }
-                listaProductos.add(producto);
-            }
-
-            // Convertir la lista a una matriz
-            productos = new String[listaProductos.size()][columnas];
-            for (int i = 0; i < listaProductos.size(); i++) {
-                productos[i] = listaProductos.get(i);
-            }
-
-            // Cerrar el ResultSet y el Statement
-            resultSet.close();
-            stm.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw new RuntimeException("Error al obtener los productos desde la base de datos.", e);
-        }
-
-        return productos;
-    }
 }

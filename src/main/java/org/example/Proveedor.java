@@ -1,10 +1,9 @@
 package org.example;
 
 import javax.swing.*;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author daniel perez
@@ -12,7 +11,7 @@ import java.sql.SQLException;
  */
 
 public class Proveedor {
-    private int id;
+    private static int id;
     private String email;
     private String contraseña;
     private static Connection c=Principal.getC();
@@ -149,25 +148,50 @@ public class Proveedor {
 
     /**
      * Metodo para que el proveedor vea los productos que provee
+     * Raul:Tuve que cambiar este metodo para convertirlo en una matriz para que el panel pueda ver todos los productos como una tabla
      */
-    public void verProvee(){
-        float precio;
-        String marca;
-        String nombre;
-        int stock;
+    static String[][] obtenerProductosDesdeBaseDeDatos() {
+        String[][] productos = null;
+
         try {
-            PreparedStatement stm = c.prepareStatement("select * from productos where referencia in(select refProduct from proveen where idProveedor=?) limit 4;");
-            stm.setInt(1,this.id);
-            ResultSet result = stm.executeQuery();
-            while (result.next()){
-                precio=result.getFloat("precio");
-                marca=result.getString("marca");
-                nombre=result.getString("nombre");
-                stock=result.getInt("stock");
+            // Crear la consulta SQL para obtener los productos
+            id= IniciarSesionProveedor.getProveedor1().getId();
+            PreparedStatement stm = Principal.getC().prepareStatement("select * from productos where referencia in(select refProduct from proveen where idProveedor=?);");
+            stm.setInt(1,id);
+            stm.execute();
+            ResultSet resultSet = stm.getResultSet();
+
+            // Obtener el número de columnas del ResultSet
+            ResultSetMetaData metaData = resultSet.getMetaData();
+            int columnas = metaData.getColumnCount();
+
+            // Crear una lista para almacenar los datos de los productos
+            List<String[]> listaProductos = new ArrayList<>();
+
+            // Recorrer el ResultSet y guardar los datos en la lista
+            while (resultSet.next()) {
+                String[] producto = new String[columnas];
+                for (int columna = 0; columna < columnas; columna++) {
+                    producto[columna] = resultSet.getString(columna + 1);
+                }
+                listaProductos.add(producto);
             }
+
+            // Convertir la lista a una matriz
+            productos = new String[listaProductos.size()][columnas];
+            for (int i = 0; i < listaProductos.size(); i++) {
+                productos[i] = listaProductos.get(i);
+            }
+
+            // Cerrar el ResultSet y el Statement
+            resultSet.close();
+            stm.close();
         } catch (SQLException e) {
-            System.out.println("falla algo a ver productos perro");
+            e.printStackTrace();
+            throw new RuntimeException("Error al obtener los productos desde la base de datos.", e);
         }
+
+        return productos;
     }
 
 
