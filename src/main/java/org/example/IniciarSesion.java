@@ -13,6 +13,7 @@ public class IniciarSesion extends JFrame {
     private JButton crearCuentaButton;
     private JButton esProveedorButton;
     private JPanel panelPrincipal;
+    private JLabel correoContrasenaIncor;
 
     private static Usuario usuario;
 
@@ -22,6 +23,7 @@ public class IniciarSesion extends JFrame {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         Principal.initConection();
         usuario = new Usuario();
+
         iniciarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -32,7 +34,7 @@ public class IniciarSesion extends JFrame {
                 if (usuario.getId()!=0) {
                     new PantallaPrincipalUsuario().setVisible(true);
                     dispose();
-                }
+                }else correoContrasenaIncor.setVisible(true);
             }
         });
 

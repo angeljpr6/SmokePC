@@ -137,8 +137,9 @@ public class Proveedor {
             stm.execute();
             System.out.println("stock actualizado a 0");
 
-            stm=c.prepareStatement("delete from proveen where refProduct=?;");
+            stm=c.prepareStatement("delete from proveen where refProduct=? and idProveedor=?;");
             stm.setInt(1,referencia);
+            stm.setInt(2,this.id);
             stm.execute();
             System.out.println("Tabla proveen actualizada");
 

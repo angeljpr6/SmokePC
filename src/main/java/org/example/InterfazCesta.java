@@ -1,15 +1,16 @@
 package org.example;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class InterfazCesta {
-    private JButton button1;
+public class InterfazCesta extends JFrame {
     private JPanel panelPrincipal;
+    private JButton comprarCestaButton;
+
 
     public InterfazCesta(){
+        this.setContentPane(panelPrincipal);
+        this.pack();
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
     }
 
