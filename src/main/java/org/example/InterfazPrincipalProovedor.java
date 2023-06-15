@@ -6,8 +6,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.example.Proveedor.obtenerProductosDesdeBaseDeDatos;
 
@@ -21,6 +19,9 @@ public class InterfazPrincipalProovedor extends JFrame {
     private JTextField textFieldMarca;
     private JTextField textFieldPrecio;
     private JTextField textFieldReferencia;
+    private JTextField textField1;
+    private JTextField textField2;
+    private JButton eliminar;
 
 
     private static Connection c;
