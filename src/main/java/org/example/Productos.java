@@ -2,13 +2,20 @@ package org.example;
 
 import java.sql.*;
 public class Productos {
+    private String nombre;
     private int stock;
     private String marca;
-    private double precio;
+    private float precio;
     private int referencia;
     private static Connection c = Principal.getC();
 
-    public Productos(int stock, String marca, double precio, int referencia) {
+    public void crearProducto(String nombre, String marca, float precio ){
+        this.nombre=nombre;
+        this.marca=marca;
+        this.precio=precio;
+    }
+
+    public Productos(int stock, String marca, float precio, int referencia) {
         PreparedStatement stm = null;
         try {
             stm = c.prepareStatement("SELECT * FROM Productos WHERE referencia = ?");
@@ -16,7 +23,7 @@ public class Productos {
             ResultSet result = stm.executeQuery();
             if (result.next()) {
                 this.stock = result.getInt("stock");
-                this.precio = result.getDouble("precio");
+                this.precio = result.getFloat("precio");
             }
         } catch (SQLException e) {
             System.out.println("Error al consultar la base de datos: " + e.getMessage());
@@ -25,6 +32,13 @@ public class Productos {
         this.marca = marca;
         this.precio = precio;
         this.referencia = referencia;
+    }
+
+    public Productos(){
+        this.marca="";
+        this.nombre="";
+        this.precio=0;
+        this.referencia=0;
     }
     public static void agregarProducto(int stock, String marca, double precio, String nombre) {
         try {
@@ -89,7 +103,64 @@ public class Productos {
         }
     }
 
+    public static Productos[] mostrarProductosIniciales(){
+        Productos[] productos=new Productos[4];
+        int cont=0;
+        try {
+
+            PreparedStatement stm = c.prepareStatement("select * from productos limit 4;");
+            ResultSet result = stm.executeQuery();
+            while (result.next()){
+                Productos p1=new Productos();
+                p1.crearProducto(result.getString("nombre"), result.getString("marca"), result.getFloat("precio"));
+                productos[cont]=p1;
+                cont++;
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return productos;
+    }
+
     public int getStock() {
         return stock;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
+
+    public String getMarca() {
+        return marca;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
+    public float getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(float precio) {
+        this.precio = precio;
+    }
+
+    public int getReferencia() {
+        return referencia;
+    }
+
+    public void setReferencia(int referencia) {
+        this.referencia = referencia;
     }
 }
