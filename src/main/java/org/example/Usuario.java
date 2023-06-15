@@ -125,6 +125,27 @@ public class Usuario {
         }
     }
 
+    public void cambiarNombre(String nuevoNombre){
+        this.nombre=nuevoNombre;
+        try {
+            PreparedStatement stm = c.prepareStatement("update usuario set nombre=? where id=?");
+            stm.setString(1,nuevoNombre);
+            stm.setInt(2,this.id);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void cambiarApellidos(String nuevosApellidos){
+        this.apellidos=nuevosApellidos;
+        try {
+            PreparedStatement stm = c.prepareStatement("update usuario set apellidos=? where id=?");
+            stm.setString(1,nuevosApellidos);
+            stm.setInt(2,this.id);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     /**
      * Se añade una tarjeta bancaria a la base de datos y se vincula con el usuario
      *

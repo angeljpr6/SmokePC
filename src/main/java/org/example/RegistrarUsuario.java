@@ -14,6 +14,7 @@ public class RegistrarUsuario extends JFrame{
     private JButton iniciarSesionButton;
     private JTextField nombreUsuario;
     private JTextField apellidosUsuario;
+    private static boolean botonProveedor=false;
 
     public RegistrarUsuario(){
         this.setContentPane(panelPrincipal);
@@ -27,11 +28,25 @@ public class RegistrarUsuario extends JFrame{
                 String email= correoElectronico.getText();
                 String contrasena= new String(contrasena1.getPassword());
                 if (contrasena.equals(new String(contrasena2.getPassword()))){
-                    IniciarSesion.getUsuario().registrarUsuario(nombre,apellidos,email,contrasena);
-                    if (IniciarSesion.getUsuario().getId()!=0) {
-                        new PantallaPrincipalUsuario().setVisible(true);
+                    if (cuentaDeProveedorCheckBox.isSelected()==true){
+                        IniciarSesionProveedor.getProveedor1().registrarProveedor(email,contrasena);
+                        new InterfazPrincipalProovedor().setVisible(true);
+                        dispose();
+                    }else {
+                        IniciarSesion.getUsuario().registrarUsuario(nombre, apellidos, email, contrasena);
+                        if (IniciarSesion.getUsuario().getId() != 0) {
+                            new PantallaPrincipalUsuario().setVisible(true);
+                            dispose();
+                        }
                     }
                 }
+            }
+        });
+        cuentaDeProveedorCheckBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+
             }
         });
     }

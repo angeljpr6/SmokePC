@@ -1,10 +1,9 @@
 package org.example;
 
 import javax.swing.*;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author daniel perez
@@ -12,7 +11,7 @@ import java.sql.SQLException;
  */
 
 public class Proveedor {
-    private int id;
+    private static int id;
     private String email;
     private String contraseña;
     private static Connection c=Principal.getC();
@@ -59,7 +58,6 @@ public class Proveedor {
      * @param email
      * @param contraseña
      */
-
     public  void registrarProveedor(String email, String contraseña){
         int idProveedor=0;
         try {
@@ -146,6 +144,54 @@ public class Proveedor {
         } catch (SQLException e) {
             System.out.println(e.getMessage());;
         }
+    }
+
+    /**
+     * Metodo para que el proveedor vea los productos que provee
+     * Raul:Tuve que cambiar este metodo para convertirlo en una matriz para que el panel pueda ver todos los productos como una tabla
+     */
+    static String[][] obtenerProductosDesdeBaseDeDatos() {
+        String[][] productos = null;
+
+        try {
+            // Crear la consulta SQL para obtener los productos
+            int id = IniciarSesionProveedor.getProveedor1().getId();
+            PreparedStatement stm = Principal.getC().prepareStatement("SELECT precio, marca, nombre, stock FROM productos WHERE referencia IN (SELECT refProduct FROM proveen WHERE idProveedor = ?)");
+            stm.setInt(1, id);
+            stm.execute();
+            ResultSet resultSet = stm.getResultSet();
+
+            // Obtener el número de columnas del ResultSet
+            ResultSetMetaData metaData = resultSet.getMetaData();
+            int columnas = metaData.getColumnCount();
+
+            // Crear una lista para almacenar los datos de los productos
+            List<String[]> listaProductos = new ArrayList<>();
+
+            // Recorrer el ResultSet y guardar los datos en la lista
+            while (resultSet.next()) {
+                String[] producto = new String[columnas];
+                for (int columna = 0; columna < columnas; columna++) {
+                    producto[columna] = resultSet.getString(columna + 1);
+                }
+                listaProductos.add(producto);
+            }
+
+            // Convertir la lista a una matriz
+            productos = new String[listaProductos.size()][columnas];
+            for (int i = 0; i < listaProductos.size(); i++) {
+                productos[i] = listaProductos.get(i);
+            }
+
+            // Cerrar el ResultSet y el Statement
+            resultSet.close();
+            stm.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Error al obtener los productos desde la base de datos.", e);
+        }
+
+        return productos;
     }
 
 
