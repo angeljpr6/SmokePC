@@ -145,7 +145,7 @@
             <properties>
               <horizontalAlignment value="0"/>
               <horizontalTextPosition value="0"/>
-              <text value="Id"/>
+              <text value="Nombre"/>
             </properties>
           </component>
           <component id="d05f5" class="javax.swing.JLabel">
