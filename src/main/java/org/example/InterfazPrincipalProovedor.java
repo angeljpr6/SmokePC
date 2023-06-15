@@ -105,20 +105,6 @@ public class InterfazPrincipalProovedor extends JFrame {
         mostrarProductos.setLayout(new BorderLayout());
         mostrarProductos.add(panelTabla, BorderLayout.CENTER);
 
-        // Agregar el JScrollBar al panel mostrarProductos en el lado derecho
-
-
-        // Configurar el GridBagConstraints para el panel mostrarProductos en el panel1
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        gbc.weightx = 1.0;
-        gbc.weighty = 1.0;
-        gbc.fill = GridBagConstraints.BOTH;
-
-        // Agregar el panel mostrarProductos al panel1 utilizando GridBagLayout
-        panel1.setLayout(new GridBagLayout());
-        panel1.add(mostrarProductos, gbc);
     }
 
 
