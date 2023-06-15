@@ -51,7 +51,7 @@ public class InterfazPrincipalProovedor extends JFrame {
         String[][] productos = obtenerProductosDesdeBaseDeDatos();
 
         // Crear un modelo de tabla para almacenar los datos de los productos
-        String[] columnas = {"Precio", "Nombre", "Marca", "Stock"};
+        String[] columnas = {"Precio", "Stock", "Marca", "Nombre"};
         DefaultTableModel model = new DefaultTableModel(productos, columnas) {
             @Override
             public boolean isCellEditable(int row, int column) {
