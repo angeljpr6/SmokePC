@@ -78,7 +78,7 @@
                   <text value="Precio:"/>
                 </properties>
               </component>
-              <component id="d2c33" class="javax.swing.JButton" binding="verMasButton" default-binding="true">
+              <component id="d2c33" class="javax.swing.JButton" binding="agregarALaCestaButton" default-binding="true">
                 <constraints>
                   <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -88,7 +88,7 @@
                   <foreground color="-1"/>
                   <horizontalTextPosition value="0"/>
                   <icon value="menos (4).png"/>
-                  <text value="ver mas"/>
+                  <text value="Agregar a la cesta"/>
                 </properties>
               </component>
               <vspacer id="c7b7">
@@ -138,7 +138,7 @@
                   <foreground color="-1"/>
                   <horizontalTextPosition value="0"/>
                   <icon value="menos (4).png"/>
-                  <text value="ver mas"/>
+                  <text value="Agregar a la cesta"/>
                 </properties>
               </component>
               <vspacer id="809df">
@@ -198,7 +198,7 @@
                   <foreground color="-1"/>
                   <horizontalTextPosition value="0"/>
                   <icon value="menos (4).png"/>
-                  <text value="ver mas"/>
+                  <text value="Agregar a la cesta"/>
                 </properties>
               </component>
               <vspacer id="de09d">
@@ -258,7 +258,7 @@
                   <foreground color="-1"/>
                   <horizontalTextPosition value="0"/>
                   <icon value="menos (4).png"/>
-                  <text value="ver mas"/>
+                  <text value="Agregar a la cesta"/>
                 </properties>
               </component>
               <vspacer id="59d2e">

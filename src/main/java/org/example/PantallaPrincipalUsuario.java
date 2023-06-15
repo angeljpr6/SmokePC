@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 
 public class PantallaPrincipalUsuario extends JFrame{
     private JTextField textField1;
-    private JButton verMasButton;
+    private JButton agregarALaCestaButton;
     private JButton cestaButton;
     private JPanel panelPrincipal;
     private JButton ajustesButton;
