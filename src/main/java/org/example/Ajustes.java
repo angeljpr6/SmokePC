@@ -8,12 +8,13 @@ public class Ajustes extends JFrame{
     private JPanel panelPrincipal;
     private JPasswordField passwordField1;
     private JPasswordField passwordField2;
-    private JTextField textField1;
-    private JTextField textField2;
+    private JTextField nuevoApellido;
+    private JTextField nuevoNombre;
     private JCheckBox cambiarContraseñaCheckBox;
     private JLabel antContraseñaText;
     private JLabel nuevContraseñaText;
-    private JTextField textField3;
+    private JTextField nuevoCorreo;
+    private JButton guardarCambiosButton;
 
 
     public Ajustes(){
@@ -36,5 +37,13 @@ public class Ajustes extends JFrame{
             }
         }
     });
-}
+        guardarCambiosButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (nuevoApellido.getText().length()>0){
+                    IniciarSesion.getUsuario().cambiarApellidos(nuevoApellido.getText());
+                }
+            }
+        });
+    }
 }
