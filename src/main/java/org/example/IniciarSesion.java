@@ -15,6 +15,7 @@ public class IniciarSesion extends JFrame {
     private JPanel panelPrincipal;
 
     private static Usuario usuario;
+
     public IniciarSesion(){
         this.setContentPane(panelPrincipal);
         this.pack();

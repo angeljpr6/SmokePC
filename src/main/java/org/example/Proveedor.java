@@ -59,7 +59,6 @@ public class Proveedor {
      * @param email
      * @param contraseña
      */
-
     public  void registrarProveedor(String email, String contraseña){
         int idProveedor=0;
         try {

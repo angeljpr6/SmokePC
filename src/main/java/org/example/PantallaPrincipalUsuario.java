@@ -12,6 +12,7 @@ public class PantallaPrincipalUsuario extends JFrame{
     private JLabel producto1;
     private JButton cestaButton;
     private JPanel panelPrincipal;
+    private JButton ajustesButton;
     private JScrollBar scrollBar1;
 
     public PantallaPrincipalUsuario() {
@@ -23,6 +24,13 @@ public class PantallaPrincipalUsuario extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 //new InterfazCesta().setVisible(true);
+            }
+        });
+        ajustesButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new Ajustes().setVisible(true);
+                dispose();
             }
         });
     }

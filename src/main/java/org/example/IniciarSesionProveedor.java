@@ -10,13 +10,12 @@ public class IniciarSesionProveedor extends JFrame{
     private JButton volverAtrasButton;
     private JButton iniciarButton;
     private JPanel panelPrincipal;
-    private static Proveedor proveedor1;
+    private static Proveedor proveedor1=new Proveedor();
 
     public IniciarSesionProveedor(){
         this.setContentPane(panelPrincipal);
         this.pack();
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        proveedor1=new Proveedor();
 
         //volver atras
         volverAtrasButton.addActionListener(new ActionListener() {
@@ -42,5 +41,11 @@ public class IniciarSesionProveedor extends JFrame{
         });
     }
 
+    public static Proveedor getProveedor1() {
+        return proveedor1;
+    }
 
+    public static void setProveedor1(Proveedor proveedor1) {
+        IniciarSesionProveedor.proveedor1 = proveedor1;
+    }
 }
