@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 
 public class PantallaPrincipalUsuario extends JFrame{
     private JTextField textField1;
-    private JButton verMasButton;
+    private JButton agregarALaCestaButton;
     private JButton cestaButton;
     private JPanel panelPrincipal;
     private JButton ajustesButton;
@@ -22,6 +22,7 @@ public class PantallaPrincipalUsuario extends JFrame{
     private JLabel nombre4;
     private JLabel marca4;
     private JLabel precio4;
+    private JButton Cerrar;
     private JScrollBar scrollBar1;
 
     public PantallaPrincipalUsuario() {
@@ -49,6 +50,16 @@ public class PantallaPrincipalUsuario extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 //new InterfazCesta().setVisible(true);
+            }
+        });
+        //Te lleva  de nuevo al menu principal
+        Cerrar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                new IniciarSesion().setVisible(true);
+                // Cerrar la ventana actual
+                dispose();
             }
         });
         ajustesButton.addActionListener(new ActionListener() {
