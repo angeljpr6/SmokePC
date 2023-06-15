@@ -12,10 +12,13 @@ public class Usuario {
     private String apellidos;
     private String email;
     private float saldo;
+    private int idCesta;
     private static Connection c=Principal.getC();
     private String contrasena;
 
-    public Usuario(int id,String nombre,String apellidos,String email,String contrasena){
+
+
+    public Usuario(int id, String nombre, String apellidos, String email, String contrasena){
         this.id=id;
         this.nombre=nombre;
         this.apellidos=apellidos;
@@ -29,6 +32,7 @@ public class Usuario {
         this.apellidos="";
         this.email="";
         this.saldo=0;
+        this.idCesta=0;
     }
 
     /**
@@ -47,7 +51,6 @@ public class Usuario {
                 this.nombre=result.getString("nombre");
                 this.apellidos=result.getString("apellidos");
                 this.saldo=result.getFloat("saldo");
-                this.contrasena=result.getString("contrasena");
                 System.out.println("Sesion iniciada");
             }else System.out.println("Email o contraseña incorrectos");
 
@@ -88,6 +91,7 @@ public class Usuario {
                 this.id=result.getInt("id");
             }
             this.saldo=0;
+            this.cambiarCesta();
 
             //Metodo para crear una cesta que se le añadira al usuario
 
@@ -96,7 +100,7 @@ public class Usuario {
         }
     }
 
-    public void cambiarCesta(){
+    public void cambiarCest(){
 
         //Se usará el metodo crear cesta Dani cabron hazlo
 
@@ -121,7 +125,6 @@ public class Usuario {
             PreparedStatement stm = c.prepareStatement("update usuario set email=? where id=?");
             stm.setString(1,nuevoEmail);
             stm.setInt(2,this.id);
-            stm.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -133,7 +136,6 @@ public class Usuario {
             PreparedStatement stm = c.prepareStatement("update usuario set nombre=? where id=?");
             stm.setString(1,nuevoNombre);
             stm.setInt(2,this.id);
-            stm.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -144,7 +146,6 @@ public class Usuario {
             PreparedStatement stm = c.prepareStatement("update usuario set apellidos=? where id=?");
             stm.setString(1,nuevosApellidos);
             stm.setInt(2,this.id);
-            stm.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -204,9 +205,46 @@ public class Usuario {
             stm.setInt(5,this.id);
             stm.setString(6,"En tramitacion");
             stm.execute();
+            this.cambiarCesta();
         } catch (SQLException e) {
             System.out.println("Algo ha ido mal");
         }
+    }
+
+    /**
+     * metodo para cambiar cesta del usuario para ser utilizado al registrarlo
+     * y al comprar la cesta
+     */
+
+    public void cambiarCesta(){
+        int idCesta=0;
+        Cesta.crearCesta(this.id);
+
+        //crear la cesta y asignarsela al objeto usuario
+        try {
+            PreparedStatement stm = c.prepareStatement("select id from cesta where idUsuario=? order by id desc limit 1;");
+            stm.setInt(1,this.id);
+            ResultSet result = stm.executeQuery();
+            while (result.next()) {
+                idCesta=result.getInt("id");
+            }
+            this.setIdCesta(idCesta);
+            System.out.println("este es el nuevo id cesta asignado"+ this.getIdCesta());
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());;
+        }
+
+        //ponerle cesta al usuario en la base de datos
+
+        try {
+            PreparedStatement stm = c.prepareStatement("update Usuario set idCesta=? where id=?;");
+            stm.setInt(1, this.getIdCesta());
+            stm.setInt(2,this.id);
+            stm.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
 
@@ -251,12 +289,11 @@ public class Usuario {
     public void setSaldo(float saldo) {
         this.saldo = saldo;
     }
-
-    public String getContrasena() {
-        return contrasena;
+    public void setIdCesta(int idCesta) {
+        this.idCesta = idCesta;
     }
 
-    public void setContrasena(String contrasena) {
-        this.contrasena = contrasena;
+    public int getIdCesta() {
+        return idCesta;
     }
 }
