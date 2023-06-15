@@ -43,7 +43,12 @@ public class InterfazPrincipalProovedor extends JFrame {
                 IniciarSesionProveedor.getProveedor1().añadirProducto(stock, marca, precio, nombre);
 
                 // Actualizar la visualización de los productos (No funciona)
-                //actualizarProductos();
+                InterfazPrincipalProovedor ventana = new InterfazPrincipalProovedor();
+                ventana.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                ventana.setVisible(true);
+
+                // Cerrar la ventana actual
+                dispose();
             }
         });
 
@@ -51,7 +56,7 @@ public class InterfazPrincipalProovedor extends JFrame {
         String[][] productos = obtenerProductosDesdeBaseDeDatos();
 
         // Crear un modelo de tabla para almacenar los datos de los productos
-        String[] columnas = {"Precio", "Stock", "Marca", "Nombre"};
+        String[] columnas = {"Precio", "Marca", "Nombre", "stock"};
         DefaultTableModel model = new DefaultTableModel(productos, columnas) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -88,26 +93,7 @@ public class InterfazPrincipalProovedor extends JFrame {
         panel1.add(mostrarProductos, gbc);
     }
 
-  /*
-                ¡¡¡¡¡ WORK IN PROGRESS!!!!
-     private void actualizarProductos() {
-        // Obtener los datos de los productos desde la base de datos
-        String[][] productos = obtenerProductosDesdeBaseDeDatos();
 
-        // Obtener el panelTabla desde el panel mostrarProductos
-        JPanel panelTabla = (JPanel) mostrarProductos.getComponent(0);
-
-        // Obtener la tabla existente desde el panelTabla
-        JTable tablaProductos = (JTable) ((JScrollPane) panelTabla.getComponent(1)).getViewport().getView();
-
-        // Actualizar el modelo de la tabla existente con los nuevos datos
-        DefaultTableModel model = (DefaultTableModel) tablaProductos.getModel();
-        model.setDataVector(productos, new String[]{"Precio", "Nombre", "Marca", "Stock"});
-
-        // Actualizar la visualización
-        revalidate();
-        repaint();
-    } */
 
 
 }

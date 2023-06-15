@@ -155,9 +155,9 @@ public class Proveedor {
 
         try {
             // Crear la consulta SQL para obtener los productos
-            id= IniciarSesionProveedor.getProveedor1().getId();
-            PreparedStatement stm = Principal.getC().prepareStatement("select * from productos where referencia in(select refProduct from proveen where idProveedor=?);");
-            stm.setInt(1,id);
+            int id = IniciarSesionProveedor.getProveedor1().getId();
+            PreparedStatement stm = Principal.getC().prepareStatement("SELECT precio, marca, nombre, stock FROM productos WHERE referencia IN (SELECT refProduct FROM proveen WHERE idProveedor = ?)");
+            stm.setInt(1, id);
             stm.execute();
             ResultSet resultSet = stm.getResultSet();
 
