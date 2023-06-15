@@ -22,6 +22,7 @@ public class InterfazPrincipalProovedor extends JFrame {
     private JTextField textFieldPrecio;
     private JTextField textFieldReferencia;
 
+
     private static Connection c;
 
     public InterfazPrincipalProovedor() {
@@ -35,11 +36,11 @@ public class InterfazPrincipalProovedor extends JFrame {
                 // Obtener los datos del producto desde la interfaz (por ejemplo, mediante JTextField)
                 int stock = Integer.parseInt(textFieldStock.getText());
                 String marca = textFieldMarca.getText();
-                double precio = Double.parseDouble(textFieldPrecio.getText());
+                float precio = Float.parseFloat(textFieldPrecio.getText());
                 String nombre = textFieldReferencia.getText();
 
                 // Llamar al método agregarProducto de la clase Productos
-                Productos.agregarProducto(stock, marca, precio, nombre);
+                IniciarSesionProveedor.getProveedor1().añadirProducto(stock, marca, precio, nombre);
 
                 // Actualizar la visualización de los productos (No funciona)
                 //actualizarProductos();
