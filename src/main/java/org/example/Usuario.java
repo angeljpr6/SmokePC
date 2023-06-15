@@ -296,4 +296,12 @@ public class Usuario {
     public int getIdCesta() {
         return idCesta;
     }
+
+    public String getContrasena() {
+        return contrasena;
+    }
+
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
+    }
 }

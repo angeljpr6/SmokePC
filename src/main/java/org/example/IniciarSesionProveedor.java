@@ -10,6 +10,7 @@ public class IniciarSesionProveedor extends JFrame{
     private JButton volverAtrasButton;
     private JButton iniciarButton;
     private JPanel panelPrincipal;
+    private JLabel correoContrasenaIncor;
     private static Proveedor proveedor1=new Proveedor();
 
     public IniciarSesionProveedor(){
@@ -35,8 +36,9 @@ public class IniciarSesionProveedor extends JFrame{
                 System.out.println(proveedor1.getId());
                 if (proveedor1.getId()!=0) {
                     new InterfazPrincipalProovedor().setVisible(true);
-                }
-                dispose();
+                    dispose();
+                }else correoContrasenaIncor.setVisible(true);
+
             }
         });
     }
