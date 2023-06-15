@@ -130,13 +130,22 @@ public class Proveedor {
      * @param referencia
      */
 
-    public void eliminarProducto(int referencia){
+    public boolean eliminarProducto(int referencia){
+        boolean productoEliminado=false;
         try {
             PreparedStatement stm = c.prepareStatement("update productos set stock=0 where referencia=? and referencia in(select refProduct from proveen where idProveedor=?);");
             stm.setInt(1,referencia);
             stm.setInt(2,this.id);
             stm.execute();
             System.out.println("stock actualizado a 0");
+
+            stm=c.prepareStatement("select * from proveen where refProduct=? and idProveedor=?;");
+            stm.setInt(1,referencia);
+            stm.setInt(2,this.id);
+            ResultSet result = stm.executeQuery();
+            if (result.next()){
+                productoEliminado=true;
+            }
 
             stm=c.prepareStatement("delete from proveen where refProduct=? and idProveedor=?;");
             stm.setInt(1,referencia);
@@ -147,6 +156,7 @@ public class Proveedor {
         } catch (SQLException e) {
             System.out.println(e.getMessage());;
         }
+        return productoEliminado;
     }
 
     /**

@@ -22,6 +22,8 @@ public class InterfazPrincipalProovedor extends JFrame {
     private JTextField textFieldElimina;
     private JButton eliminar;
     private JButton Retornar;
+    private JLabel errorElimProd;
+    private JLabel prodEliminado;
 
 
     private static Connection c;
@@ -59,15 +61,24 @@ public class InterfazPrincipalProovedor extends JFrame {
                 // Llamar al método agregarProducto de la clase Productos
 
                 int elimina = Integer.parseInt(textFieldElimina.getText());
-                IniciarSesionProveedor.getProveedor1().eliminarProducto(elimina);
+                boolean eliminado=IniciarSesionProveedor.getProveedor1().eliminarProducto(elimina);
+                if (eliminado){
+                    InterfazPrincipalProovedor ventana = new InterfazPrincipalProovedor();
+                    ventana.setExtendedState(NORMAL);
+                    ventana.setVisible(true);
+                    dispose();
+                    errorElimProd.setVisible(false);
+                    prodEliminado.setVisible(true);
+                }else {
+                    errorElimProd.setVisible(true);
+                    prodEliminado.setVisible(false);
+                }
 
                 // Actualizar la visualización de los productos (No funciona)
-                InterfazPrincipalProovedor ventana = new InterfazPrincipalProovedor();
-                ventana.setExtendedState(NORMAL);
-                ventana.setVisible(true);
+
 
                 // Cerrar la ventana actual
-                dispose();
+
             }
         });
 

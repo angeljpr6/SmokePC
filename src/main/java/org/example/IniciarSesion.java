@@ -35,6 +35,7 @@ public class IniciarSesion extends JFrame {
                     new PantallaPrincipalUsuario().setVisible(true);
                     dispose();
                 }else correoContrasenaIncor.setVisible(true);
+
             }
         });
 
