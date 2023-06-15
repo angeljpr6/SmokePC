@@ -14,6 +14,8 @@ public class RegistrarUsuario extends JFrame{
     private JButton iniciarSesionButton;
     private JTextField nombreUsuario;
     private JTextField apellidosUsuario;
+    private JLabel errCompCam;
+    private JLabel errCont;
     private static boolean botonProveedor=false;
 
     public RegistrarUsuario(){
@@ -26,20 +28,36 @@ public class RegistrarUsuario extends JFrame{
                 String nombre=nombreUsuario.getText();
                 String apellidos=apellidosUsuario.getText();
                 String email= correoElectronico.getText();
-                String contrasena= new String(contrasena1.getPassword());
-                if (contrasena.equals(new String(contrasena2.getPassword()))){
-                    if (cuentaDeProveedorCheckBox.isSelected()==true){
-                        IniciarSesionProveedor.getProveedor1().registrarProveedor(email,contrasena);
-                        new InterfazPrincipalProovedor().setVisible(true);
-                        dispose();
-                    }else {
-                        IniciarSesion.getUsuario().registrarUsuario(nombre, apellidos, email, contrasena);
-                        if (IniciarSesion.getUsuario().getId() != 0) {
-                            new PantallaPrincipalUsuario().setVisible(true);
+                errCont.setVisible(false);
+                if (nombre.length()<1 || apellidos.length()<1 || email.length()<1){
+                    errCompCam.setVisible(true);
+                }else {
+                    errCompCam.setVisible(false);
+                    String contrasena = new String(contrasena1.getPassword());
+                    if (contrasena.equals(new String(contrasena2.getPassword())) && contrasena.length()>0) {
+                        if (cuentaDeProveedorCheckBox.isSelected() == true) {
+                            IniciarSesionProveedor.getProveedor1().registrarProveedor(email, contrasena);
+                            new InterfazPrincipalProovedor().setVisible(true);
                             dispose();
+                        } else {
+                            IniciarSesion.getUsuario().registrarUsuario(nombre, apellidos, email, contrasena);
+                            if (IniciarSesion.getUsuario().getId() != 0) {
+                                new PantallaPrincipalUsuario().setVisible(true);
+                                dispose();
+                            }
                         }
-                    }
+                    } else errCont.setVisible(true);
                 }
+            }
+        });
+
+        iniciarSesionButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new IniciarSesion().setVisible(true);
+                // Cerrar la ventana actual
+                dispose();
+
             }
         });
         cuentaDeProveedorCheckBox.addActionListener(new ActionListener() {
