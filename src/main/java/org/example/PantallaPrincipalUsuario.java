@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 
 public class PantallaPrincipalUsuario extends JFrame{
     private JTextField textField1;
-    private JButton agregarALaCestaButton;
+
     private JButton cestaButton;
     private JPanel panelPrincipal;
     private JButton ajustesButton;
@@ -23,6 +23,10 @@ public class PantallaPrincipalUsuario extends JFrame{
     private JLabel marca4;
     private JLabel precio4;
     private JButton Cerrar;
+    private JButton Boton1;
+    private JButton Boton2;
+    private JButton Boton3;
+    private JButton Boton4;
     private JScrollBar scrollBar1;
 
     public PantallaPrincipalUsuario() {
@@ -50,6 +54,32 @@ public class PantallaPrincipalUsuario extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 //new InterfazCesta().setVisible(true);
+            }
+        });
+        Productos[] finalProductos = productos;
+        Boton1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               Cesta.anadirProductos(IniciarSesion.getUsuario().getIdCesta(), finalProductos[0].getReferencia());
+
+            }
+        });
+        Boton2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Cesta.anadirProductos(IniciarSesion.getUsuario().getIdCesta(), finalProductos[1].getReferencia());
+            }
+        });
+        Boton3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Cesta.anadirProductos(IniciarSesion.getUsuario().getIdCesta(), finalProductos[2].getReferencia());
+            }
+        });
+        Boton4.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Cesta.anadirProductos(IniciarSesion.getUsuario().getIdCesta(), finalProductos[3].getReferencia());
             }
         });
         //Te lleva  de nuevo al menu principal

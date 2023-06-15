@@ -9,10 +9,11 @@ public class Productos {
     private int referencia;
     private static Connection c = Principal.getC();
 
-    public void crearProducto(String nombre, String marca, float precio ){
+    public void crearProducto(String nombre, String marca, float precio, int referencia){
         this.nombre=nombre;
         this.marca=marca;
         this.precio=precio;
+        this.referencia=referencia;
     }
 
     public Productos(int stock, String marca, float precio, int referencia) {
@@ -112,7 +113,7 @@ public class Productos {
             ResultSet result = stm.executeQuery();
             while (result.next()){
                 Productos p1=new Productos();
-                p1.crearProducto(result.getString("nombre"), result.getString("marca"), result.getFloat("precio"));
+                p1.crearProducto(result.getString("nombre"), result.getString("marca"), result.getFloat("precio"), result.getInt("referencia"));
                 productos[cont]=p1;
                 cont++;
             }
