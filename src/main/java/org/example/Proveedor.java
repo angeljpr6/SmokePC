@@ -139,6 +139,7 @@ public class Proveedor {
 
             stm=c.prepareStatement("delete from proveen where refProduct=?;");
             stm.setInt(1,referencia);
+            stm.execute();
             System.out.println("Tabla proveen actualizada");
 
         } catch (SQLException e) {
@@ -156,7 +157,7 @@ public class Proveedor {
         try {
             // Crear la consulta SQL para obtener los productos
             int id = IniciarSesionProveedor.getProveedor1().getId();
-            PreparedStatement stm = Principal.getC().prepareStatement("SELECT precio, marca, nombre, stock FROM productos WHERE referencia IN (SELECT refProduct FROM proveen WHERE idProveedor = ?)");
+            PreparedStatement stm = Principal.getC().prepareStatement("SELECT referencia, precio, marca, nombre, stock FROM productos WHERE referencia IN (SELECT refProduct FROM proveen WHERE idProveedor = ?)");
             stm.setInt(1, id);
             stm.execute();
             ResultSet resultSet = stm.getResultSet();
@@ -193,7 +194,6 @@ public class Proveedor {
 
         return productos;
     }
-
 
     public int getId() {
         return id;

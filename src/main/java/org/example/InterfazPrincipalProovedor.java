@@ -19,9 +19,9 @@ public class InterfazPrincipalProovedor extends JFrame {
     private JTextField textFieldMarca;
     private JTextField textFieldPrecio;
     private JTextField textFieldReferencia;
-    private JTextField textField1;
-    private JTextField textField2;
+    private JTextField textFieldElimina;
     private JButton eliminar;
+    private JButton Retornar;
 
 
     private static Connection c;
@@ -45,7 +45,25 @@ public class InterfazPrincipalProovedor extends JFrame {
 
                 // Actualizar la visualización de los productos (No funciona)
                 InterfazPrincipalProovedor ventana = new InterfazPrincipalProovedor();
-                ventana.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                ventana.setExtendedState(NORMAL);
+                ventana.setVisible(true);
+
+                // Cerrar la ventana actual
+                dispose();
+            }
+        });
+        eliminar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                // Llamar al método agregarProducto de la clase Productos
+
+                int elimina = Integer.parseInt(textFieldElimina.getText());
+                IniciarSesionProveedor.getProveedor1().eliminarProducto(elimina);
+
+                // Actualizar la visualización de los productos (No funciona)
+                InterfazPrincipalProovedor ventana = new InterfazPrincipalProovedor();
+                ventana.setExtendedState(NORMAL);
                 ventana.setVisible(true);
 
                 // Cerrar la ventana actual
@@ -53,11 +71,20 @@ public class InterfazPrincipalProovedor extends JFrame {
             }
         });
 
+        Retornar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                new IniciarSesion().setVisible(true);
+                // Cerrar la ventana actual
+                dispose();
+            }
+        });
         // Obtener los datos de los productos desde la base de datos
         String[][] productos = obtenerProductosDesdeBaseDeDatos();
 
         // Crear un modelo de tabla para almacenar los datos de los productos
-        String[] columnas = {"Precio", "Marca", "Nombre", "stock"};
+        String[] columnas = {"id","Precio", "Marca", "Nombre", "stock"};
         DefaultTableModel model = new DefaultTableModel(productos, columnas) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -79,7 +106,7 @@ public class InterfazPrincipalProovedor extends JFrame {
         mostrarProductos.add(panelTabla, BorderLayout.CENTER);
 
         // Agregar el JScrollBar al panel mostrarProductos en el lado derecho
-        mostrarProductos.add(scrollBar1, BorderLayout.EAST);
+
 
         // Configurar el GridBagConstraints para el panel mostrarProductos en el panel1
         GridBagConstraints gbc = new GridBagConstraints();
