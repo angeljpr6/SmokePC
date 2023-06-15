@@ -45,7 +45,7 @@ public class InterfazPrincipalProovedor extends JFrame {
 
                 // Actualizar la visualización de los productos (No funciona)
                 InterfazPrincipalProovedor ventana = new InterfazPrincipalProovedor();
-                ventana.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                ventana.setExtendedState(NORMAL);
                 ventana.setVisible(true);
 
                 // Cerrar la ventana actual
@@ -79,7 +79,7 @@ public class InterfazPrincipalProovedor extends JFrame {
         mostrarProductos.add(panelTabla, BorderLayout.CENTER);
 
         // Agregar el JScrollBar al panel mostrarProductos en el lado derecho
-        mostrarProductos.add(scrollBar1, BorderLayout.EAST);
+
 
         // Configurar el GridBagConstraints para el panel mostrarProductos en el panel1
         GridBagConstraints gbc = new GridBagConstraints();
