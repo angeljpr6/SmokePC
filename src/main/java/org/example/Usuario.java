@@ -47,6 +47,7 @@ public class Usuario {
                 this.nombre=result.getString("nombre");
                 this.apellidos=result.getString("apellidos");
                 this.saldo=result.getFloat("saldo");
+                this.contrasena=result.getString("contrasena");
                 System.out.println("Sesion iniciada");
             }else System.out.println("Email o contraseña incorrectos");
 
@@ -120,6 +121,7 @@ public class Usuario {
             PreparedStatement stm = c.prepareStatement("update usuario set email=? where id=?");
             stm.setString(1,nuevoEmail);
             stm.setInt(2,this.id);
+            stm.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -131,6 +133,7 @@ public class Usuario {
             PreparedStatement stm = c.prepareStatement("update usuario set nombre=? where id=?");
             stm.setString(1,nuevoNombre);
             stm.setInt(2,this.id);
+            stm.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -141,6 +144,7 @@ public class Usuario {
             PreparedStatement stm = c.prepareStatement("update usuario set apellidos=? where id=?");
             stm.setString(1,nuevosApellidos);
             stm.setInt(2,this.id);
+            stm.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -246,5 +250,13 @@ public class Usuario {
 
     public void setSaldo(float saldo) {
         this.saldo = saldo;
+    }
+
+    public String getContrasena() {
+        return contrasena;
+    }
+
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
     }
 }
