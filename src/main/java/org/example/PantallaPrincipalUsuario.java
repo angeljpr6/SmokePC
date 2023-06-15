@@ -60,6 +60,7 @@ public class PantallaPrincipalUsuario extends JFrame{
         Boton1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                System.out.println(IniciarSesion.getUsuario().getIdCesta());
                Cesta.anadirProductos(IniciarSesion.getUsuario().getIdCesta(), finalProductos[0].getReferencia());
 
             }
@@ -96,6 +97,13 @@ public class PantallaPrincipalUsuario extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 new Ajustes().setVisible(true);
+                dispose();
+            }
+        });
+        cestaButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new InterfazCesta().setVisible(true);
                 dispose();
             }
         });

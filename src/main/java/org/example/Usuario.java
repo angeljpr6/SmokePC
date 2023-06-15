@@ -23,7 +23,7 @@ public class Usuario {
         this.nombre=nombre;
         this.apellidos=apellidos;
         this.email=email;
-        this.saldo=0;
+        this.saldo=200;
         this.contrasena=contrasena;
     }
     public Usuario(){
@@ -31,7 +31,7 @@ public class Usuario {
         this.nombre="";
         this.apellidos="";
         this.email="";
-        this.saldo=0;
+        this.saldo=200;
         this.idCesta=0;
     }
 
@@ -193,23 +193,41 @@ public class Usuario {
 
     /**
      * Hace la compra de una cesta a nombre del usuario
-     * @param i
+     * @param
      */
-    public void comprarCesta(int i,float f){
+    public void comprarCesta(int idUsuario){
+        float precio=0;
         try {
-            PreparedStatement stm = c.prepareStatement("insert into Compras values(default,?,?,?,?,?,?);");
-            stm.setDate(1, Date.valueOf(LocalDate.now()));
-            stm.setTime(2,Time.valueOf(LocalTime.now()));
-            //stm.setFloat(3,cesta.getPrecioTotal());
-            stm.setFloat(3,f);
-            stm.setInt(4,i);
-            stm.setInt(5,this.id);
-            stm.setString(6,"En tramitacion");
-            stm.execute();
-            this.cambiarCesta();
+            PreparedStatement stm = c.prepareStatement("select * from cesta where idUsuario=? order by id desc limit 1;");
+            stm.setInt(1, this.id);
+            ResultSet result = stm.executeQuery();
+            while (result.next()) {
+                precio=result.getInt("precioTotal");
+            }
+
         } catch (SQLException e) {
-            System.out.println("Algo ha ido mal");
+            throw new RuntimeException(e);
         }
+
+        if(this.saldo>=precio){
+            try {
+                PreparedStatement stm = c.prepareStatement("insert into Compras values(default,?,?,?,?,?,?);");
+                stm.setDate(1, Date.valueOf(LocalDate.now()));
+                stm.setTime(2,Time.valueOf(LocalTime.now()));
+                stm.setFloat(3,precio);
+                System.out.println(this.idCesta);
+                stm.setInt(4,this.idCesta);
+                stm.setInt(5,this.id);
+                stm.setString(6,"En tramitacion");
+                stm.execute();
+                this.cambiarCesta();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }else{
+            System.out.println("no tienes cash");
+        }
+
     }
 
     /**
