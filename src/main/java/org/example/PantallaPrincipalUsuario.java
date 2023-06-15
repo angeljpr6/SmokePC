@@ -27,6 +27,7 @@ public class PantallaPrincipalUsuario extends JFrame{
     private JButton Boton2;
     private JButton Boton3;
     private JButton Boton4;
+    private JLabel saldoUsuario;
     private JScrollBar scrollBar1;
 
     public PantallaPrincipalUsuario() {
@@ -47,6 +48,7 @@ public class PantallaPrincipalUsuario extends JFrame{
         precio2.setText(String.valueOf(productos[1].getPrecio())+" €");
         precio3.setText(String.valueOf(productos[2].getPrecio())+" €");
         precio4.setText(String.valueOf(productos[3].getPrecio())+" €");
+        saldoUsuario.setText(String.valueOf(IniciarSesion.getUsuario().getSaldo()));
 
 
         //Te lleva a la cesta
