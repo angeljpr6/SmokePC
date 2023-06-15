@@ -148,6 +148,29 @@ public class Proveedor {
         }
     }
 
+    /**
+     * Metodo para que el proveedor vea los productos que provee
+     */
+    public void verProvee(){
+        float precio;
+        String marca;
+        String nombre;
+        int stock;
+        try {
+            PreparedStatement stm = c.prepareStatement("select * from productos where referencia in(select refProduct from proveen where idProveedor=?) limit 4;");
+            stm.setInt(1,this.id);
+            ResultSet result = stm.executeQuery();
+            while (result.next()){
+                precio=result.getFloat("precio");
+                marca=result.getString("marca");
+                nombre=result.getString("nombre");
+                stock=result.getInt("stock");
+            }
+        } catch (SQLException e) {
+            System.out.println("falla algo a ver productos perro");
+        }
+    }
+
 
     public int getId() {
         return id;

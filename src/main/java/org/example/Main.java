@@ -14,6 +14,9 @@ public class Main {
 
         usuario1.iniciarSesion("plinplinplon","pupu");
         Proveedor proveedor1=new Proveedor(4,"lucas_fumon@hotmail","tuperra");
+        proveedor1.añadirProducto(10,"ar",51,"ff");
+        proveedor1.añadirProducto(10,"r",51,"ff");
+
 
 
 
